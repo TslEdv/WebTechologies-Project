@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>Booking</title>
+    <link rel="shortcut icon" type="image/jpg" href="img/favicon.png" />
 </head>
 
 <body>
@@ -16,7 +17,6 @@
                 <li><a href="contact.html">Contact</a></li>
                 <li><a href="login.html">Login</a></li>
                 <li><a href="register.html">Register</a></li>
-                <li><a href="feedback.html">Feedback</a></li>
             </ul>
         </nav>
     </header>
@@ -26,9 +26,17 @@
         <label for="start-date">Start date:</label><br />
         <input type="datetime-local" name="start-date"><br />
         <label for="end-date">End date:</label><br />
-        <input type="datetime-local" name="end-date"><br />
-        <label for="capacity">Capacity</label>
-        <input type="text" name="capacity"><br />
+        <input type="datetime-local" name="end-date">
+        <label for="capacity">Capacity</label><br/>
+        <input type="text" name="capacity">
+        <label for="requirements">Requirements</label><br/>
+        <input type="checkbox" name="requirements" id="projector">
+        <label for="projector">Projector</label><br/>
+        <input type="checkbox" name="requirements" id="audio">
+        <label for="projector">Audio</label><br/>
+        <input type="checkbox" name="requirements" id="whiteboard">
+        <label for="projector">Whiteboard</label><br/>
+        <input type="submit" value="Check availability">
     </form>
 </body>
 
