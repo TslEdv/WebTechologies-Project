@@ -2,4 +2,4 @@
 # Edvin Ess
 # Mihkel Kiil
 # Kristiina Šamanina
-#Group description: Room planning and check tool
+# Group description: Room planning and check tool
