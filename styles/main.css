@@ -67,22 +67,10 @@ body h3, p{
     margin-left: 50px;
     margin-right: 50px;
 }
-footer {
-    background-color: black;
-    bottom: 0;
-    color: white;
-    font-size: 10px;
-    height: 25px;
-    line-height: 25px;
-    position: fixed;
-    text-align: right;
-    vertical-align: middle;
-    width: 100%;
-}
+
 footer p {
     margin: 0 10px 0 0;
 }
-
 a {
 	text-decoration: none;
 	display: block;
