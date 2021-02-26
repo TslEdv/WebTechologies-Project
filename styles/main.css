@@ -110,7 +110,7 @@ label, input {
     margin-right: 20px;
     float: left;
 }
-img{
+.images img{
     margin-left: 78%;
     border: 2px solid currentColor;
     border-radius: 10px;
