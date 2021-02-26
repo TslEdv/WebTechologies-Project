@@ -99,3 +99,13 @@ article {
     left:20%; top:150px; right:0; bottom:0;
     width: 80%;
 }
+label, input {
+    display: block;
+}
+#booking-form {
+    width: 100%;
+}
+.requirements, .start-date {
+    margin-right: 20px;
+    float: left;
+}
