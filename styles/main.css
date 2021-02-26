@@ -115,13 +115,22 @@ label, input {
     border: 2px solid currentColor;
     border-radius: 10px;
     padding: 5px;
-    width: 150px;
+    height: 15%; 
+    width:15%;
 }
-img:hover {
+.images img:hover {
     box-shadow: 0 0 2px 1px rgba(230, 8, 8, 0.979);
 }
 .images {
+    padding: 0;
+    margin-right: 0;
+    margin-left: 0;
+    top: 150px;
+    width: 95%;
     z-index: 2;
+    float: right;
 }
 
-
+.images a {
+    width: 50px;
+}
