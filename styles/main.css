@@ -109,30 +109,7 @@ label, input {
     margin-right: 20px;
     float: left;
 }
- /*
-
-.requirements input {
-    width: 20px;
-    position: relative;
-    left: 70px;
-    vertical-align: middle;
+img{
+    margin-left: 78%;
+    margin-top: -100%;
 }
-.requirements label {
-    width: 30px;
-    position: relative;
-    left: -20px;
-    display: inline-block;
-    vertical-align: middle;
-}
-.requirements ul{
-    padding-top: 0;
-    padding-left: 20px;
-}
-
-.requirements {
-}
-
-.requirements li {
-    list-style: none;
-}
-*/
