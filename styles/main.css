@@ -1,0 +1,9 @@
+header{
+    background-color: aqua;
+    color: white;
+}
+nav {
+    height: 100%;
+    position: fixed;
+    list-style: none;
+}
