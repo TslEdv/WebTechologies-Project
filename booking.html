@@ -5,23 +5,30 @@
     <meta charset="utf-8">
     <title>Booking</title>
     <link rel="shortcut icon" type="image/jpg" href="img/favicon.png" />
+    <link rel="stylesheet" href="styles/main.css">
+    <link href='https://fonts.googleapis.com/css?family=RocknRoll One' rel='stylesheet'>
 </head>
 
 <body>
     <header>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home page</a></li>
-                <li><a href="overview.html">Overview</a></li>
-                <li><a href="booking.html">Booking</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="login.html">Login</a></li>
-                <li><a href="register.html">Register</a></li>
-            </ul>
-        </nav>
+        <h1>Room booking</h1>
+        <ul id="login-menu">
+          <li><a href="login.html">Login</a></li>
+          <li><a href="register.html">Register</a></li>
+        </ul>
+      </header>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home page</a></li>
+          <li><a href="overview.html">Overview</a></li>
+          <li><a href="booking.html">Booking</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
     </header>
-    <h1>Booking</h1>
-    <h2>This page contains the booking form</h2>
+    <article>
+    <h3>Booking</h3>
+    <h4>This page contains the booking form</h4>
     <form action="#" method="GET">
         <label for="start-date">Start date:</label><br />
         <input type="datetime-local" name="start-date"><br />
@@ -38,7 +45,7 @@
         <label for="projector">Whiteboard</label><br />
         <input type="submit" value="Check availability">
     </form>
-    
+    </article>
 </body>
 
 </html>
