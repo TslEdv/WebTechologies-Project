@@ -93,19 +93,6 @@ a:hover {
 	background-color: purple;
 }
 
-submit {
-	color: white;
-	background: red;
-	height: 25px;
-	font-size: 20pt;
-}
-
-submit:hover {
-	color: white;
-	background: black;
-	height: 25px;
-	font-size: 20pt;
-}
 article {
     background-color:#dddddd;
     position:absolute;
