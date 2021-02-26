@@ -68,7 +68,7 @@ body h3, p{
     margin-right: 50px;
 }
 
-a {
+nav a, header a {
 	text-decoration: none;
 	display: block;
 	color: white;
@@ -118,6 +118,9 @@ img{
 }
 img:hover {
     box-shadow: 0 0 2px 1px rgba(230, 8, 8, 0.979);
+}
+.images {
+    z-index: 1;
 }
 
 
