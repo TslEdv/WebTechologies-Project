@@ -1,11 +1,57 @@
 header{
-    background-color: light pink;
+    background-color: #222831;
     color: white;
+    margin-top: 0;
+    position:absolute;
+    left:0; right:0;
+    height: 150px;
+    font-size: 18px;
+}
+header h1, h2{
+    margin-left: 30px;
+    float:left;
+}
+header h2{
+    font-size: 22px;
+}
+header ul{
+    list-style: none;
+    float:right;
+}
+header li{
+    float: left;
 }
 nav {
-    height: 100%;
-    position: fixed;
+    display:inline-block;
+    background-color: #30475e;
+    margin-bottom: 0;
+    margin-top: 0;
+    position: absolute;
+    z-index: 1;
+    left:0; top:150px; bottom: 0;
+    width: 20%;
+}
+nav ul{
     list-style: none;
+    position: relative;
+    margin-left: 0;
+    margin-right: 90px;
+    padding-top: 50px;
+    left: 0;
+}
+nav li{
+    margin-left: 0;
+    margin-right: 25px;
+    width: 100%;
+    left:0;
+}
+nav a{
+    padding: 8px 8px 8px 32px;
+    display: block;
+    margin-left: 0;
+    margin-right: 20px;
+    width: 100%;
+    height: 70px;
 }
 html, body {
     box-sizing: border-box;
@@ -13,5 +59,71 @@ html, body {
     width: 100%;
 }
 body {
-    color: black;
+    margin: 0;
+    font-family: 'RocknRoll One';
+    font-size: 22px;
+}
+body h3, p{
+    margin-left: 50px;
+    margin-right: 50px;
+}
+footer {
+    background-color: black;
+    bottom: 0;
+    color: white;
+    font-size: 10px;
+    height: 25px;
+    line-height: 25px;
+    position: fixed;
+    text-align: right;
+    vertical-align: middle;
+    width: 100%;
+}
+footer p {
+    margin: 0 10px 0 0;
+}
+
+a {
+	text-decoration: none;
+	display: block;
+	color: white;
+	background-color: #f05454;
+	padding: 10px;
+	font-size: 40px;
+	margin: 15px;
+	border-radius: 5px;
+	-webkit-box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.75);
+	box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+a:active {
+	background-color: black;
+	-webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+	box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+a:hover {
+	background-color: purple;
+}
+
+submit {
+	color: white;
+	background: red;
+	height: 25px;
+	font-size: 20pt;
+}
+
+submit:hover {
+	color: white;
+	background: black;
+	height: 25px;
+	font-size: 20pt;
+}
+article {
+    background-color:#dddddd;
+    position:absolute;
+    left:20%; top:150px; right:0; bottom:0;
+    width: 80%;
 }
