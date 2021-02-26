@@ -29,22 +29,32 @@
     <article>
     <h3>Booking</h3>
     <h4>This page contains the booking form</h4>
-    <form action="#" method="GET">
-        <label for="start-date">Start date:</label><br />
-        <input type="datetime-local" name="start-date"><br />
-        <label for="end-date">End date:</label><br />
-        <input type="datetime-local" name="end-date"><br/>
-        <label for="capacity">Capacity</label><br />
-        <input type="text" name="capacity"><br/>
-        <label for="requirements">Requirements</label><br />
-        <input type="checkbox" name="requirements" id="projector">
-        <label for="projector">Projector</label><br />
-        <input type="checkbox" name="requirements" id="audio">
-        <label for="projector">Audio</label><br />
-        <input type="checkbox" name="requirements" id="whiteboard">
-        <label for="projector">Whiteboard</label><br />
+    <form action="#" method="GET" id="booking-form">
+      <div class="requirements">
+        <label for="requirements">Requirements</label>
+        <select multiple>
+          <option value="whiteboard">Whiteboard</option>
+          <option value="audio">Audio</option>
+          <option value="projector">Projector</option>
+        </select>
+      </div>
+      <div class="start-date">
+        <label for="start-date">Start date</label>
+        <input type="datetime-local" name="start-date">
+      </div>
+      <div class="end-date">
+        <label for="end-date">End date</label>
+        <input type="datetime-local" name="end-date">
+      </div>
+      <div class="capacity">
+        <label for="capacity">Capacity</label>
+        <input type="text" name="capacity">
+      </div>
+      <div class="submit">
         <input type="submit" value="Check availability">
-    </form>
+      </div>
+      </form>
+      </form>
     </article>
 </body>
 
