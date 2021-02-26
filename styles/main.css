@@ -109,3 +109,15 @@ label, input {
     margin-right: 20px;
     float: left;
 }
+img{
+    margin-left: 78%;
+    border: 2px solid currentColor;
+    border-radius: 10px;
+    padding: 5px;
+    width: 150px;
+}
+img:hover {
+    box-shadow: 0 0 2px 1px rgba(230, 8, 8, 0.979);
+}
+
+
