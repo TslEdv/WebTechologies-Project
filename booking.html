@@ -1,61 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <title>Booking</title>
-    <link rel="shortcut icon" type="image/jpg" href="img/favicon.png" />
-    <link rel="stylesheet" href="styles/main.css">
-    <link href='https://fonts.googleapis.com/css?family=RocknRoll One' rel='stylesheet'>
-</head>
-
-<body>
-    <header>
-        <h1>Room booking</h1>
-        <ul id="login-menu">
-          <li><a href="login.html">Login</a></li>
-          <li><a href="register.html">Register</a></li>
-        </ul>
+   <head>
+      <meta charset="utf-8">
+      <title>Booking</title>
+      <link rel="shortcut icon" type="image/jpg" href="img/favicon.png" />
+      <link rel="stylesheet" href="styles/main.css">
+      <link href='https://fonts.googleapis.com/css?family=RocknRoll One' rel='stylesheet'>
+   </head>
+   <body>
+      <header>
+         <h1>Room booking</h1>
+         <ul id="login-menu">
+            <li><a href="login.html">Login</a></li>
+            <li><a href="register.html">Register</a></li>
+         </ul>
       </header>
       <nav>
-        <ul>
-          <li><a href="index.html">Home page</a></li>
-          <li><a href="overview.html">Overview</a></li>
-          <li><a href="booking.html">Booking</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
+         <ul>
+            <li><a href="index.html">Home page</a></li>
+            <li><a href="overview.html">Overview</a></li>
+            <li><a href="booking.html">Booking</a></li>
+            <li><a href="contact.html">Contact</a></li>
+         </ul>
       </nav>
-    </header>
-    <article>
-    <h3>Booking</h3>
-    <h4>This page contains the booking form</h4>
-    <form action="#" method="GET" id="booking-form">
-      <div class="requirements">
-        <label for="requirements">Requirements</label>
-        <select multiple>
-          <option value="whiteboard">Whiteboard</option>
-          <option value="audio">Audio</option>
-          <option value="projector">Projector</option>
-        </select>
-      </div>
-      <div class="start-date">
-        <label for="start-date">Start date</label>
-        <input type="datetime-local" name="start-date">
-      </div>
-      <div class="end-date">
-        <label for="end-date">End date</label>
-        <input type="datetime-local" name="end-date">
-      </div>
-      <div class="capacity">
-        <label for="capacity">Capacity</label>
-        <input type="text" name="capacity">
-      </div>
-      <div class="submit">
-        <input type="submit" value="Check availability">
-      </div>
-      </form>
-      </form>
-    </article>
-</body>
-
+      </header>
+      <article>
+         <h3>Booking</h3>
+         <h4>This page contains the booking form</h4>
+         <form action="#" method="GET" id="booking-form">
+            <div class="requirements">
+               <label for="requirements">Requirements</label>
+               <select multiple>
+                  <option value="whiteboard">Whiteboard</option>
+                  <option value="audio">Audio</option>
+                  <option value="projector">Projector</option>
+               </select>
+            </div>
+            <div class="start-date">
+               <label for="start-date">Start date</label>
+               <input type="datetime-local" name="start-date">
+            </div>
+            <div class="end-date">
+               <label for="end-date">End date</label>
+               <input type="datetime-local" name="end-date">
+            </div>
+            <div class="capacity">
+               <label for="capacity">Capacity</label>
+               <input type="text" name="capacity">
+            </div>
+            <div class="submit">
+               <input type="submit" value="Check availability">
+            </div>
+         </form>
+         </form>
+      </article>
+   </body>
 </html>
