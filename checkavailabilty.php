@@ -25,6 +25,7 @@
         </nav>
         <article>
         <?php
+        require_once("classes.php");
         if(isset($_GET['submit'])){
             if(isset($_GET['start-date']) && isset($_GET['end-date']) && isset($_GET['capacity'])){
                 $date2 = DateTime::createFromFormat('Y-m-dTH%3i', $_GET['end-date']);
@@ -44,9 +45,26 @@
                 else if(!filter_var($_GET['capacity'], FILTER_VALIDATE_INT) === 0 || !filter_var($_GET['capacity'], FILTER_VALIDATE_INT)){
                     exit("Capacity must be a number (integer)!");
                 }
-                else{
-
+                $handle = fopen("data/featureset.csv", "r");
+                $featureSetArray = array();
+                while ($data = fgetcsv($handle) !== FALSE){
+                    $feature = new FeatureSet;
+                    $feature->id = $data[0];
+                    $feature->capacity = $data[1];
+                    $feature->whiteboard = $data[2];
+                    $feature->audio = $data[3];
+                    $feature->audio = $data[4];
+                    array_push($featureSetArray, $feature);
                 }
+                fclose($handle);
+                $handle = fopen("data/rooms.csv", "r");
+                $roomtArray = array();
+                while ($data = fgetcsv($handle) !== FALSE){
+                    $room = new Room;
+                    $room->id = $data[0];
+                    $room->features = $data[1];
+                }
+                fclose($handle);
             }
         }
         ?>
