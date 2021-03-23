@@ -1,9 +1,15 @@
 <?php
+class Features {
+    public $whiteboard;
+    public $audio;
+    public $projector;
+}
+
 class Room {
     public $id;
     public $type;
     public $capacity;
-    public $features = array_fill_keys(array("whiteboard", "audio", "projector"));
+    public $features;
     function __construct($type, $capacity, $features) {
         $this->id = uniqid();
         $this->type = $type;
