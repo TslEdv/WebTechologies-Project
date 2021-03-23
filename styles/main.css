@@ -100,36 +100,3 @@ article {
     left:20%; top:150px; right:0; bottom:0;
     width: 80%;
 }
-label, input {
-    display: block;
-}
-#booking-form {
-    width: 100%;
-}
-.requirements, .start-date {
-    margin-right: 20px;
-    float: left;
-}
-.images img{
-    margin-left: 78%;
-    border: 2px solid currentColor;
-    border-radius: 10px;
-    padding: 5px;
-    height: 15%; 
-    width:15%;
-}
-.images img:hover {
-    box-shadow: 0 0 2px 1px rgba(230, 8, 8, 0.979);
-}
-.images {
-    padding: 0;
-    margin-right: 0;
-    margin-left: 0;
-    top: 150px;
-    width: 95%;
-    float: right;
-}
-
-.images a {
-    width: 50px;
-}
