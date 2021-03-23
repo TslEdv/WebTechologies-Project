@@ -11,5 +11,6 @@ CSS was a joint responsibility among all team members.
 
 Future roles will be allocated as the project progresses.
 
-Milestone 1 is in master branch.
+Milestone 1 is in master branch in milestone1 tag.
 
+The project is available in the following link: https://enos.itcollege.ee/~krsama/project_pptable/
