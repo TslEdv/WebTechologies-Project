@@ -28,31 +28,37 @@
       <article>
          <h3>Booking</h3>
          <h4>This page contains the booking form</h4>
+         <h4>Before booking a room you must login/register first!</h4>
+         <h4>You can still browse the rooms without logging in.</h4>
          <form action="#" method="GET" id="booking-form">
-            <div class="requirements">
-               <label for="requirements">Requirements</label>
-               <select multiple id="req">
-                  <option value="whiteboard">Whiteboard</option>
-                  <option value="audio">Audio</option>
-                  <option value="projector">Projector</option>
-               </select>
+            <div class="labels">
+               <label for="start-date" id="start">Start date</label>
+               <label for="end-date" id="end">End date</label>
+               <label for="capacity" id="cap">Capacity</label>
             </div>
-            <div class="start-date">
-               <label for="start-date">Start date</label>
+            <span class="time">
                <input type="datetime-local" name="start-date">
-            </div>
-            <div class="end-date">
-               <label for="end-date">End date</label>
                <input type="datetime-local" name="end-date">
-            </div>
-            <div class="capacity">
-               <label for="capacity">Capacity</label>
-               <input type="number" name="capacity">
-            </div>
+               <input type="number" name="capacity" placeholder="100">
+            </span>
             <br>
-            <div class="submit">
+            <span class="requirements">
+               <label for="requirements" id="requer">Requirements:</label>
+               <br>
+               <div id="items">
+                  <label for="whiteboard"> Whiteboard</label>
+                  <input type="checkbox" id="whiteboard" name="whiteboard" value="whiteboard">
+                  <br>
+                  <label for="audio" id="audio"> Audio     </label>
+                  <input type="checkbox" id="audio" name="audio" value="audio">
+                  <br>
+                  <label for="projector" id="proj"> Projector </label>
+                  <input type="checkbox" id="projector" name="projector" value="projector">
+               </div>
+            </span>
+            <span class="submit">
                <input type="submit" name ="submit" value="Check availability">
-            </div>
+            </span>
          </form>
          </form>
       </article>

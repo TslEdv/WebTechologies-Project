@@ -1,20 +1,6 @@
-label, input {
-    display: block;
-    height: 30px;
-    margin-top: 5px;
-}
 #booking-form {
-    width: 100%;
-    padding-left: 100px;
-}
-.requirements, .start-date {
-    margin-right: 20px;
-    float: left;
-}
-#booking-form select{
-    height: 100%;
-    width: 100%;
-    font-size: 22px;
+    width: 80%;
+    margin-left: 100px;
 }
 input[type=submit]{
     background-color:cornflowerblue;
@@ -22,10 +8,44 @@ input[type=submit]{
     padding: 5px;
     font-size: 22px;
     border-radius: 5px;
-    width: 200px;
+    width: 400px;
     height: 100px;
     text-align: center;
+    margin-left: 25%;
 }
 article > h4{
     margin-left: 50px;
+}
+input[type=checkbox]{
+    width: 20px;
+    height: 20px;
+}
+input[type=datetime-local]{
+    width: 20%;
+    height: 50px;
+    margin: 20px;
+    font-size: 30px;
+}
+input[type=number]{
+    width: 20%;
+    height: 50px;
+    margin: 20px;
+    font-size: 30px;
+}
+#start{
+    margin-left: 1.2%;
+
+}
+#end{
+    margin-left: 16%;
+}
+#cap{
+    margin-left: 17%;
+}
+#requer{
+    margin-left: 1.2%;
+}
+#items{
+    height: 50px;
+    margin: 20px;
 }
