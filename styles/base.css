@@ -1,0 +1,12 @@
+body {
+    font-family: 'RocknRoll One';
+}
+.bg-light {
+    background-color:#dddddd;
+}
+.bg-dark {
+    background-color: #222831;
+}
+.bg-secondary {
+    background-color: #30475e;
+}
