@@ -1,19 +1,20 @@
 <?php
-class Features {
+class FeatureSet {
+    public $id;
     public $whiteboard;
     public $audio;
     public $projector;
+    public $capacity;
+    function __construct(){
+        $this->id = uniqid();
+    }
 }
 
 class Room {
     public $id;
-    public $type;
-    public $capacity;
     public $features;
-    function __construct($type, $capacity, $features) {
+    function __construct($features) {
         $this->id = uniqid();
-        $this->type = $type;
-        $this->capacity = $capacity;
         $this->features = $features;
     }
 }
