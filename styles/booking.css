@@ -1,0 +1,31 @@
+label, input {
+    display: block;
+    height: 30px;
+    margin-top: 5px;
+}
+#booking-form {
+    width: 100%;
+    padding-left: 100px;
+}
+.requirements, .start-date {
+    margin-right: 20px;
+    float: left;
+}
+#booking-form select{
+    height: 100%;
+    width: 100%;
+    font-size: 22px;
+}
+input[type=submit]{
+    background-color:cornflowerblue;
+    color: white;
+    padding: 5px;
+    font-size: 22px;
+    border-radius: 5px;
+    width: 200px;
+    height: 100px;
+    text-align: center;
+}
+article > h4{
+    margin-left: 50px;
+}

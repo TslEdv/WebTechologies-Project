@@ -5,6 +5,7 @@
       <title>Booking</title>
       <link rel="shortcut icon" type="image/jpg" href="img/favicon.png" />
       <link rel="stylesheet" href="styles/main.css">
+      <link rel="stylesheet" href="styles/booking.css">
       <link href='https://fonts.googleapis.com/css?family=RocknRoll One' rel='stylesheet'>
    </head>
    <body>
@@ -30,7 +31,7 @@
          <form action="#" method="GET" id="booking-form">
             <div class="requirements">
                <label for="requirements">Requirements</label>
-               <select multiple>
+               <select multiple id="req">
                   <option value="whiteboard">Whiteboard</option>
                   <option value="audio">Audio</option>
                   <option value="projector">Projector</option>
@@ -48,6 +49,7 @@
                <label for="capacity">Capacity</label>
                <input type="text" name="capacity">
             </div>
+            <br>
             <div class="submit">
                <input type="submit" value="Check availability">
             </div>

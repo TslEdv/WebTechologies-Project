@@ -1,0 +1,22 @@
+div {
+    background-color: #dddddd;
+    position:absolute;
+    left:80%; top:8vw; right:0; bottom:0;
+    width: 20%;
+    height: auto;
+}
+div > a > img{
+    border: 2px solid currentColor;
+    border-radius: 10px;
+    padding: 10px;
+    height: 8vw;
+    width: 16vw;
+    display: block;
+    margin: 10px;
+}
+div > a > img:hover{
+    box-shadow: 0 0 2px 1px rgba(230, 8, 8, 0.979);
+}
+article {
+    width: 60% !important;
+}

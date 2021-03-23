@@ -1,0 +1,17 @@
+input[type=submit]{
+    background-color: lightgreen;
+    color: white;
+    padding: 5px;
+    font-size: 22px;
+    margin: 5px;
+    margin-left: 50px;
+    border-radius: 5px;
+}
+#mailing{
+    display: inline;
+    background-color: lightgreen;
+    padding: 5px;
+    font-size: 22px;
+    margin: 5px;
+    border-radius: 5px;
+}
