@@ -63,8 +63,10 @@
                     $room = new Room;
                     $room->id = $data[0];
                     $room->features = $data[1];
+                    array_push($roomtArray, $room);
                 }
                 fclose($handle);
+                echo "<p>The start date is " $date1 "</p>";
             }
         }
         ?>
