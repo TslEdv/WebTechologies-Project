@@ -45,18 +45,11 @@
                 else if(!filter_var($_GET['capacity'], FILTER_VALIDATE_INT) === 0 || !filter_var($_GET['capacity'], FILTER_VALIDATE_INT)){
                     exit("Capacity must be a number (integer)!");
                 }
-                $handle = fopen("data/featureset.csv", "r");
-                $featureSetArray = array();
-                while ($data = fgetcsv($handle) !== FALSE){
-                    $feature = new FeatureSet;
-                    $feature->id = $data[0];
-                    $feature->capacity = $data[1];
-                    $feature->whiteboard = $data[2];
-                    $feature->audio = $data[3];
-                    $feature->audio = $data[4];
-                    array_push($featureSetArray, $feature);
-                }
-                fclose($handle);
+                $capacity = intval($_GET['capacity']) * 2;
+                $whiteboard = intval($_GET['whiteboard']);
+                $audio = intval($_GET['audio']);
+                $projector = intval($_GET['projector']);
+                $featureSetArray = DataActions::readFeatures($capacity, )
                 $handle = fopen("data/rooms.csv", "r");
                 $roomtArray = array();
                 while ($data = fgetcsv($handle) !== FALSE){
@@ -66,7 +59,7 @@
                     array_push($roomtArray, $room);
                 }
                 fclose($handle);
-                echo "<p>The start date is " $date1 "</p>";
+                
             }
         }
         ?>
