@@ -52,6 +52,10 @@
                 $featureSetArray = DataActions::readFeatures($capacity, $whiteboard, $audio, $projector);
                 $roomArray = DataActions::readRooms($featureSetArray);
                 $bookingArray = DataActions::readBookings($roomArray, $date1, $date2);
+                foreach($bookingArray as $booking){
+                    unset($roomArray[$booking->roomId]);
+                }
+                
             }
         }
         ?>
