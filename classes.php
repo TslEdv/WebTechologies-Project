@@ -19,19 +19,19 @@ class Booking {
     public $roomId;
 }
 class DataActions {
-    static function readFeatures($capacity, $whiteboard, $projector){
+    static function readFeatures($capacity, $whiteboard, $projector){ //returns featureSets with required features
         $handle = fopen("data/featureset.csv", "r");
         $featureSetArray = array();
-        while ($data = fgetcsv($handle) !== FALSE){
+        while ($data = fgetcsv($handle) !== FALSE){ //reads lines from csv
             $feature = new FeatureSet;
             $feature->id = $data[0];
-            $feature->capacity = intval($data[1]);
+            $feature->capacity = intval($data[1]); //sets features to 0 or 1
             $feature->whiteboard = intval($data[2]);
             $feature->audio = intval($data[3]);
             $feature->projector = intval($data[4]);
-            if($feature->capacity >= $capacity){
+            if($feature->capacity >= $capacity){ //capacity requirement check
                 if($whiteboard == 1){
-                    if($feature->whiteboard !== 1){
+                    if($feature->whiteboard !== 1){ //checks whiteboard only if we care about it
                         continue;
                     }
                 }
@@ -50,6 +50,42 @@ class DataActions {
         }
         fclose($handle);
         return $featureSetArray;
+    }
+    static function readRooms($featureSetArray){
+        $handle = fopen("data/rooms.csv", "r");
+        $roomArray = array();
+        while ($data = fgetcsv($handle) !== FALSE){
+            $room = new Room;
+            $room->id = $data[0];
+            $room->features = $data[1];
+            foreach($featureSetArray as $feature){
+                if($room->features == $feature->id){
+                    $roomArray[$room->id] = $room;
+                }
+            }
+        }
+        fclose($handle);
+        return $roomArray;
+    }
+    static function readBookings($roomArray, $start, $end){ //reads bookings
+        $handle = fopen("data/bookings.csv", "r");
+        $bookingArray = array();
+        while ($data = fgetcsv($handle) !== FALSE){
+            $booking = new Booking;
+            $booking->id = $data[0];
+            $booking->startDate = $data[1];
+            $booking->endDate = $data[2];
+            $booking->roomId = $data[3];
+            foreach($roomArray as $room){
+                if($booking->roomId == $room->id){
+                    if($booking->startDate <= $end && $booking->endDate >= $start){ //checks if requested date overlaps with date in booking, returns true if overlaps
+                        array_push($bookingArray, $booking); //contains bookings that overlap
+                    }
+                }
+            }
+        }
+        fclose($handle);
+        return $bookingArray;
     }
 }
 ?>
