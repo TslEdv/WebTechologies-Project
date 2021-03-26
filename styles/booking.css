@@ -3,6 +3,7 @@
     margin-left: 100px;
 }
 input[type=submit]{
+    margin-top: 20px;
     background-color:cornflowerblue;
     color: white;
     padding: 5px;
