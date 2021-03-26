@@ -16,39 +16,33 @@ input[type=submit]{
 article > h4{
     margin-left: 50px;
 }
-input[type=checkbox]{
-    width: 20px;
-    height: 20px;
+input, label {
+    display: block;
 }
-input[type=datetime-local]{
-    width: 20%;
+.start-date, .end-date {
+    float: left;
+}
+.start-date input, .end-date input {
+    width: 65%;
+    float: left;
+    margin-top: 20px;
     height: 50px;
-    margin: 20px;
     font-size: 30px;
 }
-input[type=number]{
+.capacity {
     width: 20%;
+    float: left
+}
+.capacity input {
+    width: 50%;
+    float: left;
+    margin-top: 20px;
     height: 50px;
-    margin: 20px;
     font-size: 30px;
 }
-#start{
-    margin-left: 1.2%;
-
+.features {
+    clear: left;
 }
-#end{
-    margin-left: 16%;
-}
-#cap{
-    margin-left: 17%;
-}
-#requer{
-    margin-left: 1.2%;
-}
-#items{
-    height: 50px;
-    margin: 20px;
-}
-input[type=submit]:hover{
-    background-color:palevioletred;
+.features label, .features input {
+    display: inline;
 }
