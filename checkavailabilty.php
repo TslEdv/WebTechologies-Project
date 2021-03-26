@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Contact & Feedback</title>
+        <title>Check availability</title>
         <link rel="shortcut icon" type="image/jpg" href="img/favicon.png" />
         <link rel="stylesheet" href="styles/main.css">
         <link href='https://fonts.googleapis.com/css?family=RocknRoll One' rel='stylesheet'>
@@ -28,8 +28,8 @@
         require_once("classes.php");
         if(isset($_GET['submit'])){
             if(isset($_GET['start-date']) && isset($_GET['end-date']) && isset($_GET['capacity'])){
-                $date2 = DateTime::createFromFormat('Y-m-dTH%3i', $_GET['end-date']); //converts date strings to dates
-                $date1 = DateTime::createFromFormat('Y-m-dTH%3i', $_GET['start-date']);
+                $date1 = new DateTime($_GET['start-date']);
+                $date2 = new DateTime($_GET['end-date']);
                 if($date1 === false){ //input validation
                     exit("Please check Your date! Incorrect start date!");
                 }
@@ -39,7 +39,7 @@
                 else if($date2 < $date1){
                     exit("Please check Your date! Starting date cannot be further than ending date!");
                 }
-                else if($_GET['start-date'] < date("Y-m-d")){
+                else if($date1 < date("Y-m-d")){
                     exit("Please check Your date! Starting date cannot be in the past!");
                 }
                 else if(!filter_var($_GET['capacity'], FILTER_VALIDATE_INT) === 0 || !filter_var($_GET['capacity'], FILTER_VALIDATE_INT)){ //checks if capacity is integer
@@ -51,11 +51,11 @@
                 $projector = intval(isset($_GET['projector']));
                 $featureSetArray = DataActions::readFeatures($capacity, $whiteboard, $audio, $projector);
                 $roomArray = DataActions::readRooms($featureSetArray);
-                $bookingArray = DataActions::readBookings($roomArray, $date1, $date2);
+                $bookingArray = DataActions::readBookedRooms($roomArray, $date1, $date2);
                 foreach($bookingArray as $booking){
                     unset($roomArray[$booking->roomId]);
                 }
-                
+                print_r($featureSetArray);
             }
         }
         ?>
