@@ -1,12 +1,49 @@
 <?php
 class FeatureSet {
-    public $id;
-    public $capacity;
-    public $whiteboard;
-    public $audio;
-    public $projector;
-    public $title;
-    public $description;
+    private $id;
+    private $capacity;
+    private $whiteboard;
+    private $audio;
+    private $projector;
+    private $title;
+    private $description;
+    private $image;
+
+    function __construct($id, $capacity, $whiteboard, $audio, $projector, $title, $description, $image)
+    {
+        $this->id = $id;
+        $this->capacity = $capacity;
+        $this->whiteboard = $whiteboard;
+        $this->audio = $audio;
+        $this->projector = $projector;
+        $this->title = $title;
+        $this->description = $description;
+        $this->image = $image;
+    }
+    public function getId(){
+        return $this->id;
+    }
+    public function getCapacity(){
+        return $this->capacity;
+    }
+    public function getWhiteboard(){
+        return $this->whiteboard;
+    }
+    public function getAudio(){
+        return $this->audio;
+    }
+    public function getProjector(){
+        return $this->projector;
+    }
+    public function getTitle(){
+        return $this->title;
+    }
+    public function getDescription(){
+        return $this->description;
+    }
+    public function getImage(){
+        return $this->image;
+    }
 }
 
 class Room {
@@ -25,29 +62,24 @@ class DataActions {
         $handle = fopen("data/featureset.csv", "r");
         $featureSetArray = array();
         while (($data = fgetcsv($handle)) !== FALSE){ //reads lines from csv
-            $feature = new FeatureSet;
-            $feature->id = $data[0];
-            $feature->capacity = $data[1]; //sets features to 0 or 1
-            $feature->whiteboard = $data[2];
-            $feature->audio = $data[3];
-            $feature->projector = $data[4];
-            if($feature->capacity >= $capacity){ //capacity requirement check
+            $feature = new FeatureSet($data[0], $data[1], $data[2], $data[3], $data[4], $data[5], $data[6], $data[7]);
+            if($feature->getCapacity() >= $capacity){ //capacity requirement check
                 if($whiteboard == 1){
-                    if($feature->whiteboard != 1){ //checks whiteboard only if we care about it
+                    if($feature->getWhiteboard() != 1){ //checks whiteboard only if we care about it
                         continue;
                     }
                 }
                 if($audio == 1){
-                    if($feature->audio != 1){
+                    if($feature->getAudio() != 1){
                         continue;
                     }
                 }
                 if($projector == 1){
-                    if($feature->projector != 1){
+                    if($feature->getProjector() != 1){
                         continue;
                     }
                 }
-                $featureSetArray[$feature->id] = $feature;
+                $featureSetArray[$feature->getId()] = $feature;
             }
         }
         fclose($handle);
@@ -61,7 +93,7 @@ class DataActions {
             $room->id = $data[0];
             $room->features = $data[1];
             foreach($featureSetArray as $feature){
-                if($room->features == $feature->id){
+                if($room->features == $feature->getId()){
                     $roomArray[$room->id] = $room;
                 }
             }
