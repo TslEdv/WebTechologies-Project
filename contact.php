@@ -1,3 +1,10 @@
+<?php
+   if(isset($_POST['feedbacksubmit'])){
+      $text = $_POST['feedback'] . PHP_EOL;
+      echo $text;
+      file_put_contents("data/feedback.csv", $text, FILE_APPEND);
+   }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,13 +48,13 @@
       <p><b>Working hours: </b>Monday-Friday 14:00-02:00</p>
       <br>
       <p><b>If you have any feedback or recommendations, please fill the box below:</b></p>
-      <form action="#">
+      <form action="contact.php" method="POST">
          <label for="feedback">
             <h2>Feedback:</h2>
          </label>
          <textarea id="feedback" name="feedback" rows="7" cols="50"></textarea>
          <br>
-         <input type="submit" value="Submit">
+         <input type="submit" value="Submit" name="feedbacksubmit">
       </form>
    </article>
 </body>
