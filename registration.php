@@ -7,6 +7,13 @@
     <link rel="shortcut icon" type="image/jpg" href="img/favicon.png" />
     <link rel="stylesheet" href="styles/main.css">
     <link href='https://fonts.googleapis.com/css?family=RocknRoll One' rel='stylesheet'>
+    <style>
+         p{
+            text-align: center; 
+            margin-top: 14vw;
+            font-size: xxx-large;
+        }
+    </style>
 </head>
 
 <body>
@@ -37,12 +44,12 @@
             $password = password_hash($_POST['psw1'], PASSWORD_DEFAULT);
             unset($_POST['psw1']);
             if (!password_verify($_POST['psw2'], $password)) {
-                exit("Password was unconfirmed! Please try again!");
+                exit("<p>Password was unconfirmed! Please try again!</p>");
             }
             unset($_POST['psw2']);
             $text = $_POST['uname'] . "," . $password . PHP_EOL;
             file_put_contents("data/users.csv", $text, FILE_APPEND);
-            echo "Registery Successful!";
+            echo "<p>Registery Successful!</p>";
         }
         if (isset($_POST['login'])) {
             $handle = fopen("data/users.csv", "r");
@@ -58,14 +65,14 @@
                     session_set_cookie_params($lifetime);
                     session_start();
                     $_SESSION['username'] = $_POST['uname'];
-                    echo "Login Successful! Welcome back ", $_SESSION['username'];
+                    echo "<p>Login Successful! Welcome back ", $_SESSION['username'], "</p>";
                 } else {
                     session_start();
                     $_SESSION['username'] = $_POST['uname'];
-                    echo "Login Successful! Welcome back ", $_SESSION['username'];
+                    echo "<p>Login Successful! Welcome back ", $_SESSION['username'], "</p>";
                 }
             } else {
-                echo "Wrong Username or Password!";
+                echo "<p>Wrong Username or Password!</p>";
             }
         }
         ?>

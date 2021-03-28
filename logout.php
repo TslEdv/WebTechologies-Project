@@ -38,7 +38,10 @@
         session_destroy();
         unset($_COOKIE['PHPSESSID']);
         setcookie('PHPSESSID', null, -1, '/');
-        echo "Logged out!";
+        echo "<p style='text-align: center; 
+        margin-top: 14vw;
+        font-size: xxx-large;'>
+        Logged out!</p>";
         ?>
     </article>
 </body>
