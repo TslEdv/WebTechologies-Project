@@ -58,12 +58,12 @@
                 foreach($featureSetArray as $feature){ //removes featuresets with 0 available rooms
                     $featureRoomCount = 0;
                     foreach($roomArray as $room){
-                        if($room->featureId == $feature->id){
+                        if($room->featureId == $feature->getId()){
                             $featureRoomCount++;
                         }
                     }
                     if($featureRoomCount == 0){
-                        unset($featureSetArray[$feature->id]);
+                        unset($featureSetArray[$feature->getId()]);
                     }
                 }
             }
