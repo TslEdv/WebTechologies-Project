@@ -47,8 +47,20 @@ class FeatureSet {
 }
 
 class Room {
-    public $id;
-    public $features;
+    private $id;
+    private $features;
+
+    public function __construct($id, $features)
+    {
+        $this->id = $id;
+        $this->features = $features;
+    }
+    public function getId(){
+        return $this->id;
+    }
+    public function getFeatures(){
+        return $this->features;
+    }
 }
 class Booking {
     public $id;
@@ -89,12 +101,10 @@ class DataActions {
         $handle = fopen("data/rooms.csv", "r");
         $roomArray = array();
         while (($data = fgetcsv($handle)) !== FALSE){
-            $room = new Room;
-            $room->id = $data[0];
-            $room->features = $data[1];
+            $room = new Room($data[0], $data[1]);
             foreach($featureSetArray as $feature){
-                if($room->features == $feature->getId()){
-                    $roomArray[$room->id] = $room;
+                if($room->getFeatures() == $feature->getId()){
+                    $roomArray[$room->getId()] = $room;
                 }
             }
         }
