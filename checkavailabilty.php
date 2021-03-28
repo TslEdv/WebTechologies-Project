@@ -59,7 +59,7 @@
                 $roomArray = DataActions::readRooms($featureSetArray);
                 $bookingArray = DataActions::readBookedRooms($roomArray, $date1, $date2);
                 foreach($bookingArray as $booking){ //removes rooms that are booked
-                    unset($roomArray[$booking->roomId]);
+                    unset($roomArray[$booking->getRoomId()]);
                 }
                 foreach($featureSetArray as $feature){ //removes featuresets with 0 available rooms
                     $featureRoomCount = 0;
