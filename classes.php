@@ -5,6 +5,8 @@ class FeatureSet {
     public $whiteboard;
     public $audio;
     public $projector;
+    public $title;
+    public $description;
 }
 
 class Room {
@@ -45,7 +47,7 @@ class DataActions {
                         continue;
                     }
                 }
-                array_push($featureSetArray, $feature);
+                $featureSetArray[$feature->id] = $feature;
             }
         }
         fclose($handle);
@@ -54,7 +56,7 @@ class DataActions {
     static function readRooms($featureSetArray){
         $handle = fopen("data/rooms.csv", "r");
         $roomArray = array();
-        while (($data = fgetcsv($handle, 1000, ",")) !== FALSE){
+        while (($data = fgetcsv($handle)) !== FALSE){
             $room = new Room;
             $room->id = $data[0];
             $room->features = $data[1];
@@ -70,7 +72,7 @@ class DataActions {
     static function readBookedRooms($roomArray, $start, $end){ //reads bookings
         $handle = fopen("data/bookings.csv", "r");
         $bookingArray = array();
-        while (($data = fgetcsv($handle, 1000, ",")) !== FALSE){
+        while (($data = fgetcsv($handle)) !== FALSE){
             $booking = new Booking;
             $booking->id = $data[0];
             $booking->startDate = new DateTime($data[1]);
@@ -79,7 +81,7 @@ class DataActions {
             foreach($roomArray as $room){
                 if($booking->roomId == $room->id){
                     if($booking->startDate <= $end && $booking->endDate >= $start){ //checks if requested date overlaps with date in booking, returns true if overlaps
-                        array_push($bookingArray, $booking); //contains bookings that overlap
+                        $bookingArray[$booking->id] = $booking; //contains bookings that overlap
                     }
                 }
             }

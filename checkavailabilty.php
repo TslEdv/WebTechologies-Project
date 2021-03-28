@@ -52,10 +52,20 @@
                 $featureSetArray = DataActions::readFeatures($capacity, $whiteboard, $audio, $projector);
                 $roomArray = DataActions::readRooms($featureSetArray);
                 $bookingArray = DataActions::readBookedRooms($roomArray, $date1, $date2);
-                foreach($bookingArray as $booking){
+                foreach($bookingArray as $booking){ //removes rooms that are booked
                     unset($roomArray[$booking->roomId]);
                 }
-                print_r($featureSetArray);
+                foreach($featureSetArray as $feature){ //removes featuresets with 0 available rooms
+                    $featureRoomCount = 0;
+                    foreach($roomArray as $room){
+                        if($room->featureId == $feature->id){
+                            $featureRoomCount++;
+                        }
+                    }
+                    if($featureRoomCount == 0){
+                        unset($featureSetArray[$feature->id]);
+                    }
+                }
             }
         }
         ?>
