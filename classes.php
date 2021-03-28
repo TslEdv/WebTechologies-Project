@@ -22,7 +22,7 @@ class DataActions {
     static function readFeatures($capacity, $whiteboard, $audio, $projector){ //returns featureSets with required features
         $handle = fopen("data/featureset.csv", "r");
         $featureSetArray = array();
-        while ($data = fgetcsv($handle) !== FALSE){ //reads lines from csv
+        while (($data = fgetcsv($handle)) !== FALSE){ //reads lines from csv
             $feature = new FeatureSet;
             $feature->id = $data[0];
             $feature->capacity = $data[1]; //sets features to 0 or 1
@@ -31,17 +31,17 @@ class DataActions {
             $feature->projector = $data[4];
             if($feature->capacity >= $capacity){ //capacity requirement check
                 if($whiteboard == 1){
-                    if($feature->whiteboard !== 1){ //checks whiteboard only if we care about it
+                    if($feature->whiteboard != 1){ //checks whiteboard only if we care about it
                         continue;
                     }
                 }
                 if($audio == 1){
-                    if($feature->audio !== 1){
+                    if($feature->audio != 1){
                         continue;
                     }
                 }
                 if($projector == 1){
-                    if($feature->projector !== 1){
+                    if($feature->projector != 1){
                         continue;
                     }
                 }
@@ -54,7 +54,7 @@ class DataActions {
     static function readRooms($featureSetArray){
         $handle = fopen("data/rooms.csv", "r");
         $roomArray = array();
-        while ($data = fgetcsv($handle) !== FALSE){
+        while (($data = fgetcsv($handle, 1000, ",")) !== FALSE){
             $room = new Room;
             $room->id = $data[0];
             $room->features = $data[1];
@@ -70,7 +70,7 @@ class DataActions {
     static function readBookedRooms($roomArray, $start, $end){ //reads bookings
         $handle = fopen("data/bookings.csv", "r");
         $bookingArray = array();
-        while ($data = fgetcsv($handle) !== FALSE){
+        while (($data = fgetcsv($handle, 1000, ",")) !== FALSE){
             $booking = new Booking;
             $booking->id = $data[0];
             $booking->startDate = new DateTime($data[1]);
