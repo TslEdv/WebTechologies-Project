@@ -72,6 +72,7 @@
                         unset($featureSetArray[$feature->getId()]);
                     }
                 }
+                print_r($featureSetArray);
             }
         }
         ?>
