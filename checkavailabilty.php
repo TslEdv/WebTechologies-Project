@@ -72,6 +72,20 @@
                         unset($featureSetArray[$feature->getId()]);
                     }
                 }
+                echo "<ul>";
+                foreach($featureSetArray as $feature){
+                    echo "<li>";
+                    echo "<div class='room'>";
+                    echo "<h3>Title</h3>";
+                    echo "<p>description</p>";
+                    echo "<p>available rooms: </p>";
+                    echo "<form action='booking.php' method='POST'>";
+                    echo "<button name='book' value='' type='submit'>Book</button>";
+                    echo "</form>";
+                    echo "</div>";
+                    echo "</li>";
+                }
+                echo "</ul>";
             }
         }
         ?>
