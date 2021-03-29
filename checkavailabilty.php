@@ -72,9 +72,6 @@
                         unset($featureSetArray[$feature->getId()]);
                     }
                 }
-<<<<<<< HEAD
-                print_r($featureSetArray);
-=======
                 echo "<ul>";
                 foreach($featureSetArray as $feature){
                     echo "<li>";
@@ -89,7 +86,6 @@
                     echo "</li>";
                 }
                 echo "</ul>";
->>>>>>> 1219cf805e04b180d57392f84313fb6e58d76e81
             }
         }
         ?>
