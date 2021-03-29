@@ -36,10 +36,10 @@
             if(isset($_GET['start-date']) && isset($_GET['end-date']) && isset($_GET['capacity'])){
                 $date1 = new DateTime($_GET['start-date']);
                 $date2 = new DateTime($_GET['end-date']);
-                if($date1 === false){ //input validation
+                if($date1 == false){ //input validation
                     exit("Please check Your date! Incorrect start date!");
                 }
-                else if($date2 === false){
+                else if($date2 == false){
                     exit("Please check Your date! Incorrect end date!");
                 }
                 else if($date2 < $date1){
@@ -64,7 +64,7 @@
                 foreach($featureSetArray as $feature){ //removes featuresets with 0 available rooms
                     $featureRoomCount = 0;
                     foreach($roomArray as $room){
-                        if($room->featureId == $feature->getId()){
+                        if($room->getFeatures() == $feature->getId()){
                             $featureRoomCount++;
                         }
                     }
