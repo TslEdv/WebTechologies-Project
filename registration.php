@@ -21,7 +21,7 @@
         <h1>Room booking</h1>
         <ul id="login-menu">
             <?php
-            if (isset($_COOKIE['PHPSESSID'])) {
+            if(isset($_COOKIE['PP_Table'])){
                 echo "<li><a href='logout.php'>Log out</a></li>";
             } else {
                 echo "<li><a href='login.html'>Login</a></li>";
@@ -62,12 +62,14 @@
             }
             if ($success == TRUE) {
                 if (isset($_POST['remember'])) {
+                    session_name("PP_Table");
                     $lifetime = 86400 * 30;
                     session_set_cookie_params($lifetime);
                     session_start();
                     $_SESSION['username'] = $_POST['uname'];
                     echo "<p>Login Successful! Welcome back ", $_SESSION['username'], "</p>";
                 } else {
+                    session_name("PP_Table");
                     session_start();
                     $_SESSION['username'] = $_POST['uname'];
                     echo "<p>Login Successful! Welcome back ", $_SESSION['username'], "</p>";

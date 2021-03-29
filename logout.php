@@ -14,7 +14,7 @@
         <h1>Room booking</h1>
         <ul id="login-menu">
             <?php
-            if (isset($_COOKIE['PHPSESSID'])) {
+            if(isset($_COOKIE['PP_Table'])){
                 echo "<li><a href='logout.php'>Log out</a></li>";
             } else {
                 echo "<li><a href='login.html'>Login</a></li>";
@@ -36,8 +36,8 @@
         session_start();
         session_unset();
         session_destroy();
-        unset($_COOKIE['PHPSESSID']);
-        setcookie('PHPSESSID', null, -1, '/');
+        unset($_COOKIE['PP_Table']);
+        setcookie('PP_Table', null, -1, '/');
         echo "<p style='text-align: center; 
         margin-top: 14vw;
         font-size: xxx-large;'>
