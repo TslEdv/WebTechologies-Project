@@ -47,7 +47,8 @@
                 exit("<p>Password was unconfirmed! Please try again!</p>");
             }
             unset($_POST['psw2']);
-            $text = $_POST['uname'] . "," . $password . PHP_EOL;
+            $uniqueid = uniqid();
+            $text = $_POST['uname'] . "," . $password . "," . $uniqueid . PHP_EOL;
             file_put_contents("data/users.csv", $text, FILE_APPEND);
             echo "<p>Registery Successful!</p>";
         }

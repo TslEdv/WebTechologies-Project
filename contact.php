@@ -1,7 +1,7 @@
 <?php
    if(isset($_POST['feedbacksubmit'])){
-      $text = $_POST['feedback'] . PHP_EOL;
-      echo $text;
+      $date = date("Y-m-d H:i:s"); 
+      $text = $date . "," . $_POST['feedback'] . PHP_EOL;
       file_put_contents("data/feedback.csv", $text, FILE_APPEND);
    }
 ?>
