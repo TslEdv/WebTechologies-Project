@@ -5,6 +5,7 @@
         <title>Check availability</title>
         <link rel="shortcut icon" type="image/jpg" href="img/favicon.png" />
         <link rel="stylesheet" href="styles/main.css">
+        <link rel="stylesheet" href="styles/checkavailability.css">
         <link href='https://fonts.googleapis.com/css?family=RocknRoll One' rel='stylesheet'>
      </head>
      <body>
@@ -76,6 +77,7 @@
                 foreach($featureSetArray as $feature){
                     echo "<li>";
                     echo "<div class='room'>";
+                    echo "<div class='room-info'>";
                     echo "<h3>",$feature->getTitle(),"</h3>";
                     echo "<p>", $feature->getDescription(),"</p>";
                     echo "<p>available rooms: </p>";
@@ -84,6 +86,7 @@
                     echo "</form>";
                     echo "</div>";
                     echo "<img src=", $feature->getImage(),">";
+                    echo "</div>";
                     echo "</li>";
                 }
                 echo "</ul>";
