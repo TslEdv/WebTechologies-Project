@@ -76,13 +76,14 @@
                 foreach($featureSetArray as $feature){
                     echo "<li>";
                     echo "<div class='room'>";
-                    echo "<h3>Title</h3>";
-                    echo "<p>description</p>";
+                    echo "<h3>",$feature->getTitle(),"</h3>";
+                    echo "<p>", $feature->getDescription(),"</p>";
                     echo "<p>available rooms: </p>";
                     echo "<form action='booking.php' method='POST'>";
                     echo "<button name='book' value='' type='submit'>Book</button>";
                     echo "</form>";
                     echo "</div>";
+                    echo "<img src=", $feature->getImage(),">";
                     echo "</li>";
                 }
                 echo "</ul>";
