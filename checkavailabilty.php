@@ -81,7 +81,7 @@
                     echo "<div class='room-actions'>";
                     echo "<p>available rooms: </p>";
                     echo "<form action='booking.php' method='POST'>";
-                    echo "<button name='book' value='' type='submit'>Book</button>";
+                    echo "<button name='roomId' value=", $feature->getId(), " type='submit'>Book</button>";
                     echo "</form>";
                     echo "</div>";
                     echo "</div>";
