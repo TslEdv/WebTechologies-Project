@@ -21,7 +21,9 @@
         <h1>Room booking</h1>
         <ul id="login-menu">
             <?php
-            if(isset($_COOKIE['PP_Table'])){
+            session_name("PP_Table");
+            session_start();
+            if(isset($_SESSION['username'])){
                 echo "<li><a href='logout.php'>Log out</a></li>";
             } else {
                 echo "<li><a href='login.html'>Login</a></li>";
