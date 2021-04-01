@@ -1,3 +1,7 @@
+.room {
+    overflow: hidden;
+}
+
 .room-info{
     float: left;
 }
@@ -17,4 +21,18 @@ img{
 }
 ul{
     list-style: none;
+}
+.room-actions p, .room-actions form {
+    display: inline;
+}
+.room-actions button {
+    background-color:cornflowerblue;
+    color: white;
+    padding: 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    width: 100px;
+    height: 10px;
+    text-align: center;
+    line-height: 3px;
 }
