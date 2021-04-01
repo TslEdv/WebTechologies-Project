@@ -85,7 +85,9 @@
                     echo "<button name='book' value='' type='submit'>Book</button>";
                     echo "</form>";
                     echo "</div>";
+                    echo "<div class='room-details'>";
                     echo "<img src=", $feature->getImage(),">";
+                    echo "</div>";
                     echo "</div>";
                     echo "</li>";
                 }
