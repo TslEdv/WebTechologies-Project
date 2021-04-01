@@ -86,7 +86,7 @@
                     echo "</div>";
                     echo "</div>";
                     echo "<div class='room-details'>";
-                    echo "<img src=", $feature->getImage(),">";
+                    echo "<a href=", $feature->getImage() ,"><img src=", $feature->getImage(),"></a>";
                     echo "</div>";
                     echo "</div>";
                 }
