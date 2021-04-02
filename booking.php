@@ -45,7 +45,7 @@
                 setcookie("PP_Table", null, -1);
                 exit("<p>You must be logged in to view this page!</p>");
             }
-            $booking = new Booking(uniqid(), "foobar",  new DateTime("2021-04-20T15:30"),  new DateTime("2021-04-20T16:30"), $_POST['roomId']);
+            $booking = new Booking(uniqid(), $_SESSION['username'],  new DateTime("2021-04-20T15:30"),  new DateTime("2021-04-20T16:30"), $_POST['roomId']);
             $handle = fopen("data/bookings.csv", "a");
             $bookingArray = array($booking->getId(), $booking->getUser(), $booking->getStartDate()->format("Y-m-d\TH:i"), $booking->getEndDate()->format("Y-m-d\TH:i"), $booking->getRoomId());
             fputcsv($handle, $bookingArray);

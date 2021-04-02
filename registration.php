@@ -57,7 +57,7 @@
             $_SESSION['username'] = $_POST['uname'];
             echo "<p>Registery Successful!</p>";
         }
-        if (isset($_POST['login'])) {
+        else if (isset($_POST['login'])) {
             $handle = fopen("data/users.csv", "r");
             $success = FALSE;
             while (($data = fgetcsv($handle)) !== FALSE) {
