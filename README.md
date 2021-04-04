@@ -11,6 +11,9 @@ CSS was a joint responsibility among all team members.
 
 Future roles will be allocated as the project progresses.
 
+### Technical description
+There are 4 rooms available in total. To view all rooms, you can set a capacity of 2. Due to the current situation, rooms are limited to 50% capacity.
+
 Milestone 1 is in master branch in milestone1 tag.
 
 Milestone 2 is in master branch in milestone2 tag.
