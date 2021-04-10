@@ -53,44 +53,65 @@
     <article>
         <?php
         if (isset($_POST['register'])) {
-            $password = password_hash($_POST['psw1'], PASSWORD_DEFAULT);
-            unset($_POST['psw1']);
-            if (!password_verify($_POST['psw2'], $password)) {
+            require_once("connect.db.php");
+            $mysqli = new mysqli($db_server, $db_user, $db_password, $db_name); // connect to database
+            $username = mysqli_real_escape_string($mysqli, $_POST['uname']); //sanitize
+            if (empty($username) || empty($_POST['psw1']) || empty($_POST['psw2'])){ //check for inputs
+                exit("Incorrect input!");
+            }
+            $password = password_hash($_POST['psw1'], PASSWORD_DEFAULT); // store password as a hash
+            unset($_POST['psw1']); //unset post password
+            if (!password_verify($_POST['psw2'], $password)) { //verify that ps1 was is equal to hashed ps2
                 exit("<p>Password was unconfirmed! Please try again!</p>");
             }
             unset($_POST['psw2']);
-            $uniqueid = uniqid();
-            $text = $_POST['uname'] . "," . $password . "," . $uniqueid . PHP_EOL;
-            file_put_contents("data/users.csv", $text, FILE_APPEND);
-            session_name("PP_Table");
+            $password = mysqli_real_escape_string($mysqli, $password);
+            $user_check_query = "SELECT * FROM users WHERE username='$username' LIMIT 1"; //query for checking if user already exists
+            $result = mysqli_query($mysqli, $user_check_query);
+            $user = mysqli_fetch_assoc($result);
+            if ($user){ //check for existance
+                if ($user['username'] === $username) {
+                    exit("Username already exists");
+                }
+            }
+            $query = "INSERT INTO users (username, password) VALUES('$username', '$password')"; // query for adding user
+            mysqli_query($mysqli, $query);
+            session_name("PP_Table"); // start session and add variables
             session_start();
             $_SESSION['username'] = $_POST['uname'];
+            $_SESSION['success'] = "You are now logged in";
             echo "<p>Registery Successful!</p>";
         }
         else if (isset($_POST['login'])) {
-            $handle = fopen("data/users.csv", "r");
-            $success = FALSE;
-            while (($data = fgetcsv($handle)) !== FALSE) {
-                if (($data[0] == $_POST['uname']) && (password_verify($_POST['psw'], $data[1]))) {
-                    $success = TRUE;
-                }
+            require_once("connect.db.php");
+            $mysqli = new mysqli($db_server, $db_user, $db_password, $db_name); // connect to database
+            $username = mysqli_real_escape_string($db, $_POST['uname']);
+            $password = mysqli_real_escape_string($db, $_POST['psw']);
+            if (empty($username)) {
+                exit("Username is required");
             }
-            if ($success == TRUE) {
+            if (empty($password)) {
+                exit("Password is required");
+            }
+            $password = password_hash($_POST['psw'], PASSWORD_DEFAULT);
+            $query = "SELECT * FROM users WHERE username='$username' AND password='$password'";
+            $results = mysqli_query($mysqli, $query);
+            if (mysqli_num_rows($results) == 1) {
                 if (isset($_POST['remember'])) {
                     session_name("PP_Table");
                     $lifetime = 86400 * 30;
                     session_set_cookie_params($lifetime);
                     session_start();
-                    $_SESSION['username'] = $_POST['uname'];
+                    $_SESSION['username'] = $username;
                     echo "<p>Login Successful! Welcome back ", $_SESSION['username'], "</p>";
                 } else {
                     session_name("PP_Table");
                     session_start();
-                    $_SESSION['username'] = $_POST['uname'];
+                    $_SESSION['username'] = $username;
                     echo "<p>Login Successful! Welcome back ", $_SESSION['username'], "</p>";
                 }
-            } else {
-                echo "<p>Wrong Username or Password!</p>";
+            }else {
+                exit("Wrong username/password combination");
             }
         }
         ?>
