@@ -56,15 +56,17 @@
             require_once("connect.db.php");
             $mysqli = new mysqli($db_server, $db_user, $db_password, $db_name); // connect to database
             $username = mysqli_real_escape_string($mysqli, $_POST['uname']); //sanitize
+            $password_1 = mysqli_real_escape_string($mysqli, $_POST['psw1']);
+            $password_2 = mysqli_real_escape_string($mysqli, $_POST['psw2']);
             if (empty($username) || empty($_POST['psw1']) || empty($_POST['psw2'])){ //check for inputs
                 exit("Incorrect input!");
             }
-            $password = password_hash($_POST['psw1'], PASSWORD_DEFAULT); // store password as a hash
             unset($_POST['psw1']); //unset post password
-            if (!password_verify($_POST['psw2'], $password)) { //verify that ps1 was is equal to hashed ps2
-                exit("<p>Password was unconfirmed! Please try again!</p>");
+            if ($password_1 != $password_2) {
+                exit("The two passwords do not match");
             }
             unset($_POST['psw2']);
+            $password = sha1($password_1);
             $password = mysqli_real_escape_string($mysqli, $password);
             $user_check_query = "SELECT * FROM users WHERE username='$username' LIMIT 1"; //query for checking if user already exists
             $result = mysqli_query($mysqli, $user_check_query);
@@ -78,22 +80,22 @@
             mysqli_query($mysqli, $query);
             session_name("PP_Table"); // start session and add variables
             session_start();
-            $_SESSION['username'] = $_POST['uname'];
+            $_SESSION['username'] = $username;
             $_SESSION['success'] = "You are now logged in";
             echo "<p>Registery Successful!</p>";
         }
         else if (isset($_POST['login'])) {
             require_once("connect.db.php");
             $mysqli = new mysqli($db_server, $db_user, $db_password, $db_name); // connect to database
-            $username = mysqli_real_escape_string($db, $_POST['uname']);
-            $password = mysqli_real_escape_string($db, $_POST['psw']);
+            $username = mysqli_real_escape_string($mysqli, $_POST['uname']);
+            $password = mysqli_real_escape_string($mysqli, $_POST['psw']);
             if (empty($username)) {
                 exit("Username is required");
             }
             if (empty($password)) {
                 exit("Password is required");
             }
-            $password = password_hash($_POST['psw'], PASSWORD_DEFAULT);
+            $password = sha1($password);
             $query = "SELECT * FROM users WHERE username='$username' AND password='$password'";
             $results = mysqli_query($mysqli, $query);
             if (mysqli_num_rows($results) == 1) {
