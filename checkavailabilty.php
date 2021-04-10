@@ -46,7 +46,7 @@
         <?php
         require_once("classes.php");
         if(isset($_GET['submit'])){
-            if(isset($_GET['start-date']) && isset($_GET['end-date']) && isset($_GET['capacity'])){
+            if(!empty($_GET['start-date']) && !empty($_GET['end-date']) && isset($_GET['capacity'])){
                 $date1 = new DateTime($_GET['start-date']);
                 $date2 = new DateTime($_GET['end-date']);
                 if($date1 == false){ //input validation
@@ -93,6 +93,8 @@
                     echo "<div class='room-actions'>";
                     echo "<p>available rooms: </p>";
                     echo "<form action='booking.php' method='POST'>";
+                    echo "<input type='hidden' name='startdate' value=", $date1->format('Y-m-d\TH:i'), ">";
+                    echo "<input type='hidden' name='enddate' value=", $date2->format('Y-m-d\TH:i'), ">";
                     echo "<button name='roomId' value=", $feature->getId(), " type='submit'>Book</button>";
                     echo "</form>";
                     echo "</div>";
@@ -102,6 +104,8 @@
                     echo "</div>";
                     echo "</div>";
                 }
+            } else{
+                echo "Please check your input!";
             }
         }
         ?>
