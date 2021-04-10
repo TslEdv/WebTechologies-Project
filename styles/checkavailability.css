@@ -36,3 +36,6 @@ ul{
     text-align: center;
     line-height: 3px;
 }
+.room-buttons form {
+    margin-right: 5px;
+}
