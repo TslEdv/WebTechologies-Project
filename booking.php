@@ -45,8 +45,8 @@
                 setcookie("PP_Table", null, -1);
                 exit("<p>You must be logged in to view this page!</p>");
             }
-            $startdate = new DateTime($_GET['start-date']);
-            $enddate = new DateTime($_GET['end-date']);
+            $startdate = new DateTime($_POST['start-date']);
+            $enddate = new DateTime($_POST['end-date']);
             if($startdate == false){ //input validation
                 exit("Please check Your date! Incorrect start date!");
             }

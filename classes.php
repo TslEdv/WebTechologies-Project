@@ -145,10 +145,14 @@ class DataActions {
         return $roomArray;
     }
     static function readBookedRooms($roomArray, $start, $end){ //reads bookings
-        $handle = fopen("data/bookings.csv", "r");
+        require_once("connect.db.php");
+        $mysqli = new mysqli($db_server, $db_user, $db_password, $db_name);
+        $query = $mysqli->prepare("SELECT * FROM bookings;");
+        $query->execute();
+        $query->bind_result($id, $roomid, $userid, $startDate, $endDate);
         $bookingArray = array();
-        while (($data = fgetcsv($handle)) !== FALSE){
-            $booking = new Booking($data[0],"foobar", $data[1], new DateTime($data[2]), new DateTime($data[3]));
+        while ($query->fetch()){
+            $booking = new Booking($id,$roomid, $userid, new DateTime($startDate), new DateTime($endDate));
             foreach($roomArray as $room){
                 if($booking->getRoomId() == $room->getId()){
                     if($booking->getStartDate() <= $end && $booking->getEndDate() >= $start){ //checks if requested date overlaps with date in booking, returns true if overlaps
@@ -157,7 +161,8 @@ class DataActions {
                 }
             }
         }
-        fclose($handle);
+        $query->close();
+        $mysqli->close();
         return $bookingArray;
     }
 }
