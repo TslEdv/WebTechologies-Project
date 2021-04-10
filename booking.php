@@ -47,6 +47,7 @@
         <article>
         <?php
         require_once("classes.php");
+        require_once("connect.db.php");
         if(isset($_POST['roomId'])){
             session_name("PP_Table");
             session_start();
@@ -71,13 +72,23 @@
             else if($startdate < date("Y-m-d")){
                 exit("Please check Your date! Starting date cannot be in the past!");
             }
-            $booking = new Booking(uniqid(), $_SESSION['username'],  $startdate,  $enddate, $_POST['roomId']);
-            $handle = fopen("data/bookings.csv", "a");
-            $bookingArray = array($booking->getId(), $booking->getUser(), $booking->getStartDate()->format("Y-m-d\TH:i"), $booking->getEndDate()->format("Y-m-d\TH:i"), $booking->getRoomId());
-            fputcsv($handle, $bookingArray);
-            fclose($handle);
-            echo "<p>Booking successful! Your booking number is " . $booking->getId() ."</p>";
-            echo "<p>You have made a booking starts on ", $_POST['startdate'], " and ends on ", $_POST['enddate'],"</p>";
+            $mysqli = new mysqli($db_server, $db_user, $db_password, $db_name);
+            $query = $mysqli->prepare("SELECT ID FROM users WHERE username=?");
+            $query->bind_param("s", $_SESSION['username']);
+            $query->execute();
+            $query->bind_result($user);
+            $userid = 0;
+            while($query->fetch()){
+               $userid = $user;
+            }
+            $query = $mysqli->prepare("INSERT INTO bookings (room_ID, user_ID, start_date, end_date) VALUES (?, ?, ?, ?)");
+            $query->bind_param("iiss", $_POST['roomId'], $userid, $startdate->format("Y-m-d\TH:i"), $enddate->format("Y-m-d\TH:i"));
+            $query->execute();
+            print($query->error);
+            $query->close();
+            echo "<p>Booking successful! Your booking number is " . $mysqli->insert_id ."</p>";
+            echo "<p>You have made a booking starts on ", $startdate->format("Y-m-d\TH:i"), " and ends on ", $enddate->format("Y-m-d\TH:i"),"</p>";
+
         }
         else {
             echo "Invalid request!";

@@ -105,9 +105,10 @@ class DataActions {
         $var = mysqli_real_escape_string($link, $var);
         return $var;
     }
-    static function readFeatures($capacity, $whiteboard, $audio, $projector){ //returns featureSets with required features
-        require_once("connect.db.php");
-        $mysqli = new mysqli($db_server, $db_user, $db_password, $db_name);
+    static function readFeatures($mysqli, $capacity, $whiteboard, $audio, $projector){ //returns featureSets with required features
+        if($mysqli->connect_error){
+            die($mysqli->connect_error);
+        }
         $capacity = intval(self::sanitiseInput($mysqli, $capacity));
         $whiteboard = intval(self::sanitiseInput($mysqli, $whiteboard));
         $audio = intval(self::sanitiseInput($mysqli, $audio));
@@ -115,19 +116,19 @@ class DataActions {
         $query = $mysqli->prepare("SELECT * FROM featuresets WHERE capacity>=? AND whiteboard>=? AND audio>=? AND projector>=?;");
         $query->bind_param("iiii", $capacity, $whiteboard, $audio, $projector);
         $query->execute();
-        $query->bind_result($id, $title, $capacity, $description, $image, $whiteboard, $audio, $projector);
+        $query->bind_result($id, $capacity, $title, $description, $image, $whiteboard, $audio, $projector);
         $featureSetArray = array();
         while ($query->fetch()){
             $feature = new FeatureSet($id, $capacity, $whiteboard, $audio, $projector, $title, $description, $image);
             $featureSetArray[$feature->getId()] = $feature;
         }
         $query->close();
-        $mysqli->close();
         return $featureSetArray;
     }
-    static function readRooms($featureSetArray){
-        require_once("connect.db.php");
-        $mysqli = new mysqli($db_server, $db_user, $db_password, $db_name);
+    static function readRooms($mysqli, $featureSetArray){
+        if($mysqli->connect_error){
+            die($mysqli->connect_error);
+        }
         $roomArray = array();
         foreach($featureSetArray as $key=>$feature){
             $key = intval(self::sanitiseInput($mysqli, $key));
@@ -141,14 +142,10 @@ class DataActions {
             }
             $query->close();
         }
-        $mysqli->close();
         return $roomArray;
     }
-    static function readFeatureRooms($featureId){
-        require_once("connect.db.php");
-        $mysqli = new mysqli($db_server, $db_user, $db_password, $db_name);
+    static function readFeatureRooms($mysqli, $featureId){
         $roomArray = array();
-        $featureId = intval(self::sanitiseInput($mysqli, $featureId));
         $query = $mysqli->prepare("SELECT ID, room_number FROM rooms WHERE feature_ID=?");
         $query->bind_param("i", $featureId);
         $query->execute();
@@ -157,11 +154,10 @@ class DataActions {
         while($query->fetch()){
             $numberArray[$id] = $room_number;
         }
+        $query->close();
         return $numberArray;
     }
-    static function readBookedRooms($roomArray, $start, $end){ //reads bookings
-        require_once("connect.db.php");
-        $mysqli = new mysqli($db_server, $db_user, $db_password, $db_name);
+    static function readBookedRooms($mysqli, $roomArray, $start, $end){ //reads bookings
         $query = $mysqli->prepare("SELECT * FROM bookings;");
         $query->execute();
         $query->bind_result($id, $roomid, $userid, $startDate, $endDate);
@@ -177,7 +173,6 @@ class DataActions {
             }
         }
         $query->close();
-        $mysqli->close();
         return $bookingArray;
     }
 }

@@ -45,6 +45,7 @@
         <article>
         <?php
         require_once("classes.php");
+        require_once("connect.db.php");
         if(isset($_GET['submit'])){
             if(!empty($_GET['start-date']) && !empty($_GET['end-date']) && isset($_GET['capacity'])){
                 $date1 = new DateTime($_GET['start-date']);
@@ -68,9 +69,10 @@
                 $whiteboard = intval(isset($_GET['whiteboard'])); //converts required features into 0 or 1
                 $audio = intval(isset($_GET['audio']));
                 $projector = intval(isset($_GET['projector']));
-                $featureSetArray = DataActions::readFeatures($capacity, $whiteboard, $audio, $projector);
-                $roomArray = DataActions::readRooms($featureSetArray);
-                $bookingArray = DataActions::readBookedRooms($roomArray, $date1, $date2);
+                $mysqli = new mysqli($db_server, $db_user, $db_password, $db_name);
+                $featureSetArray = DataActions::readFeatures($mysqli, $capacity, $whiteboard, $audio, $projector);
+                $roomArray = DataActions::readRooms($mysqli, $featureSetArray);
+                $bookingArray = DataActions::readBookedRooms($mysqli, $roomArray, $date1, $date2);
                 foreach($bookingArray as $booking){ //removes rooms that are booked
                     unset($roomArray[$booking->getRoomId()]);
                 }
@@ -92,8 +94,8 @@
                     echo "<p>", $feature->getDescription(),"</p>";
                     echo "<div class='room-actions'>";
                     echo "<p>Click room number to book: </p>";
-                    $roomNumbers = DataActions::readFeatureRooms($feature->getId());
-                    foreach($roomNumbers as $roomNumber=>$roomId){
+                    $roomNumbers = DataActions::readFeatureRooms($mysqli, $feature->getId());
+                    foreach($roomNumbers as $roomId=>$roomNumber){
                         echo "<span class='room-buttons'>";
                         echo "<form action='booking.php' method='POST'>";
                         echo "<input type='hidden' name='startdate' value=", $date1->format('Y-m-d\TH:i'), ">";
@@ -112,6 +114,7 @@
             } else{
                 echo "Please check your input!";
             }
+            $mysqli->close();
         }
         ?>
         </article>
