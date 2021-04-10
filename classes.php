@@ -49,17 +49,22 @@ class FeatureSet {
 class Room {
     private $id;
     private $features;
+    private $number;
 
-    public function __construct($id, $features)
+    public function __construct($id, $features, $number)
     {
         $this->id = $id;
         $this->features = $features;
+        $this->number = $number;
     }
     public function getId(){
         return $this->id;
     }
     public function getFeatures(){
         return $this->features;
+    }
+    public function getRoom(){
+        return $this->number;
     }
 }
 class Booking {
