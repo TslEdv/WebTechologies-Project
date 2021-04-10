@@ -144,6 +144,21 @@ class DataActions {
         $mysqli->close();
         return $roomArray;
     }
+    static function readFeatureRooms($featureId){
+        require_once("connect.db.php");
+        $mysqli = new mysqli($db_server, $db_user, $db_password, $db_name);
+        $roomArray = array();
+        $featureId = intval(self::sanitiseInput($mysqli, $featureId));
+        $query = $mysqli->prepare("SELECT ID, room_number FROM rooms WHERE feature_ID=?");
+        $query->bind_param("i", $featureId);
+        $query->execute();
+        $query->bind_result($id, $room_number);
+        $numberArray = array();
+        while($query->fetch()){
+            $numberArray[$id] = $room_number;
+        }
+        return $numberArray;
+    }
     static function readBookedRooms($roomArray, $start, $end){ //reads bookings
         require_once("connect.db.php");
         $mysqli = new mysqli($db_server, $db_user, $db_password, $db_name);
