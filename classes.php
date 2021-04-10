@@ -144,15 +144,16 @@ class DataActions {
         }
         return $roomArray;
     }
-    static function readFeatureRooms($mysqli, $featureId){
-        $roomArray = array();
+    static function readFeatureRooms($mysqli, $featureId, $roomArray){
         $query = $mysqli->prepare("SELECT ID, room_number FROM rooms WHERE feature_ID=?");
         $query->bind_param("i", $featureId);
         $query->execute();
         $query->bind_result($id, $room_number);
         $numberArray = array();
         while($query->fetch()){
-            $numberArray[$id] = $room_number;
+            if(array_key_exists($id, $roomArray)){
+                $numberArray[$id] = $room_number;
+            }
         }
         $query->close();
         return $numberArray;
@@ -163,7 +164,7 @@ class DataActions {
         $query->bind_result($id, $roomid, $userid, $startDate, $endDate);
         $bookingArray = array();
         while ($query->fetch()){
-            $booking = new Booking($id,$roomid, $userid, new DateTime($startDate), new DateTime($endDate));
+            $booking = new Booking($id,$userid, new DateTime($startDate), new DateTime($endDate), $roomid);
             foreach($roomArray as $room){
                 if($booking->getRoomId() == $room->getId()){
                     if($booking->getStartDate() <= $end && $booking->getEndDate() >= $start){ //checks if requested date overlaps with date in booking, returns true if overlaps
