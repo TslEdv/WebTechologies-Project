@@ -98,45 +98,50 @@ class Booking {
     }
 }
 class DataActions {
+    static function sanitiseInput($link, $var){
+        $var = stripslashes($var);
+        $var = htmlentities($var);
+        $var = strip_tags($var);
+        $var = mysqli_real_escape_string($link, $var);
+        return $var;
+    }
     static function readFeatures($capacity, $whiteboard, $audio, $projector){ //returns featureSets with required features
-        $handle = fopen("data/featureset.csv", "r");
+        require_once("connect.db.php");
+        $mysqli = new mysqli($db_server, $db_user, $db_password, $db_name);
+        $capacity = intval(self::sanitiseInput($mysqli, $capacity));
+        $whiteboard = intval(self::sanitiseInput($mysqli, $whiteboard));
+        $audio = intval(self::sanitiseInput($mysqli, $audio));
+        $projector = intval(self::sanitiseInput($mysqli, $projector));
+        $query = $mysqli->prepare("SELECT * FROM featuresets WHERE capacity>=? AND whiteboard>=? AND audio>=? AND projector>=?;");
+        $query->bind_param("iiii", $capacity, $whiteboard, $audio, $projector);
+        $query->execute();
+        $query->bind_result($id, $title, $capacity, $description, $image, $whiteboard, $audio, $projector);
         $featureSetArray = array();
-        while (($data = fgetcsv($handle)) !== FALSE){ //reads lines from csv
-            $feature = new FeatureSet($data[0], $data[1], $data[2], $data[3], $data[4], $data[5], $data[6], $data[7]);
-            if($feature->getCapacity() >= $capacity){ //capacity requirement check
-                if($whiteboard == 1){
-                    if($feature->getWhiteboard() != 1){ //checks whiteboard only if we care about it
-                        continue;
-                    }
-                }
-                if($audio == 1){
-                    if($feature->getAudio() != 1){
-                        continue;
-                    }
-                }
-                if($projector == 1){
-                    if($feature->getProjector() != 1){
-                        continue;
-                    }
-                }
-                $featureSetArray[$feature->getId()] = $feature;
-            }
+        while ($query->fetch()){
+            $feature = new FeatureSet($id, $capacity, $whiteboard, $audio, $projector, $title, $description, $image);
+            $featureSetArray[$feature->getId()] = $feature;
         }
-        fclose($handle);
+        $query->close();
+        $mysqli->close();
         return $featureSetArray;
     }
     static function readRooms($featureSetArray){
-        $handle = fopen("data/rooms.csv", "r");
+        require_once("connect.db.php");
+        $mysqli = new mysqli($db_server, $db_user, $db_password, $db_name);
         $roomArray = array();
-        while (($data = fgetcsv($handle)) !== FALSE){
-            $room = new Room($data[0], $data[1]);
-            foreach($featureSetArray as $feature){
-                if($room->getFeatures() == $feature->getId()){
-                    $roomArray[$room->getId()] = $room;
-                }
+        foreach($featureSetArray as $key=>$feature){
+            $key = intval(self::sanitiseInput($mysqli, $key));
+            $query = $mysqli->prepare("SELECT * FROM rooms WHERE feature_ID=?;");
+            $query->bind_param("i", $key);
+            $query->execute();
+            $query->bind_result($id, $featureid, $room_number);
+            while ($query->fetch()){
+                $room = new Room($id, $featureid, $room_number);
+                $roomArray[$room->getId()] = $room;
             }
+            $query->close();
         }
-        fclose($handle);
+        $mysqli->close();
         return $roomArray;
     }
     static function readBookedRooms($roomArray, $start, $end){ //reads bookings
