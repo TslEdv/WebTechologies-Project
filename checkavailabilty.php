@@ -91,11 +91,16 @@
                     echo "<h3>",$feature->getTitle(),"</h3>";
                     echo "<p>", $feature->getDescription(),"</p>";
                     echo "<div class='room-actions'>";
-                    echo "<p>available rooms: </p>";
-                    echo "<form action='booking.php' method='POST'>";
-                    echo "<input type='hidden' name='startdate' value=", $date1->format('Y-m-d\TH:i'), ">";
-                    echo "<input type='hidden' name='enddate' value=", $date2->format('Y-m-d\TH:i'), ">";
-                    echo "<button name='roomId' value=", $feature->getId(), " type='submit'>Book</button>";
+                    echo "<p>Click room number to book: </p>";
+                    $roomNumbers = DataActions::readFeatureRooms($feature->getId());
+                    foreach($roomNumbers as $roomNumber=>$roomId){
+                        echo "<span class='room-buttons'>";
+                        echo "<form action='booking.php' method='POST'>";
+                        echo "<input type='hidden' name='startdate' value=", $date1->format('Y-m-d\TH:i'), ">";
+                        echo "<input type='hidden' name='enddate' value=", $date2->format('Y-m-d\TH:i'), ">";
+                        echo "<button name='roomId' value=", $roomId, " type='submit'>", $roomNumber, "</button>";
+                        echo "</form>";
+                    }
                     echo "</form>";
                     echo "</div>";
                     echo "</div>";
