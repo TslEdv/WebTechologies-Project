@@ -35,10 +35,20 @@
    </header>
    <nav>
       <ul>
-         <li><a href="index.php">Home page</a></li>
-         <li><a href="overview.php">Overview</a></li>
-         <li><a href="bookingform.php">Booking</a></li>
-         <li><a href="contact.php">Contact</a></li>
+         <?php
+         if (isset($_SESSION['username'])) {
+            echo "<li><a href='index.php'>Home page</a></li>
+               <li><a href='overview.php'>Overview</a></li>
+               <li><a href='bookingform.php'>Booking</a></li>
+               <li><a href='contact.php'>Contact</a></li>
+               <li><a href='mybooking.php'>My bookings</a></li>";
+         } else {
+            echo "<li><a href='index.php'>Home page</a></li>
+               <li><a href='overview.php'>Overview</a></li>
+               <li><a href='bookingform.php'>Booking</a></li>
+               <li><a href='contact.php'>Contact</a></li>";
+         }
+         ?>
       </ul>
    </nav>
    <article>
