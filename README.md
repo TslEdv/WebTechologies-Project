@@ -16,6 +16,18 @@ There are 4 rooms available in total. To view all rooms, you can set a capacity 
 
 Milestone 1 is in master branch in milestone1 tag.
 
-Milestone 2 is in master branch in milestone2 tag.
+Milestone 2 is in master branch in milestone2r tag with corrections.
 
 The project is available in the following link: https://enos.itcollege.ee/~krsama/project_pptable/
+
+### Known issues
+
+* Rooms do not display capacity
+* Messy layout setup on pages written by Edvin
+* My bookings says "here are your bookings" even when the user has no bookings
+* Date text does not fit into form fields
+* No limit per user, no CAPTCHA
+* ISO8601 format on confirmation page is too technical for the average user
+* Passwords are sanitised and hashed with SHA1
+* Feedback uses CSV and does not log IP
+
