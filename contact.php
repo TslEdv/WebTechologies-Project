@@ -25,6 +25,7 @@
    <link rel="stylesheet" href="styles/main.css">
    <link rel="stylesheet" href="styles/contact.css">
    <link href='https://fonts.googleapis.com/css?family=RocknRoll One' rel='stylesheet'>
+   <script type="text/javascript" src="scripts/logout.js"></script>
 </head>
 
 <body>
@@ -35,7 +36,7 @@
          session_name("PP_Table");
          session_start();
          if(isset($_SESSION['username'])){
-            echo "<li><a href='logout.php'>Log out</a></li>";
+            echo "<li><a onclick='logout()'>Log out</a></li>";
          } else {
             echo "<li><a href='login.html'>Login</a></li>";
             echo "<li><a href='register.html'>Register</a></li>";
