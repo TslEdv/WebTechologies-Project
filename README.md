@@ -37,6 +37,5 @@ The project is available in the following link: https://enos.itcollege.ee/~krsam
  * Logout confirmation
  * Show password button
  * Feedback submission confirmation
- * Check availability buttons should generate POST requests in JavaScript
 
 
