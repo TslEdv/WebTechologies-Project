@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="styles/main.css">
         <link rel="stylesheet" href="styles/login.css">
         <link href='https://fonts.googleapis.com/css?family=RocknRoll One' rel='stylesheet'>
+        <script type="text/javascript" src="scripts/showpassword.js"></script>
         <style>
           nav{
             height:90%
@@ -45,7 +46,8 @@
                     <br>
                     <label for="psw"><b>Password</b></label>
                     <br>
-                    <input type="password" placeholder="Enter Password" name="psw1" required>
+                    <input type="password" id="pwd" placeholder="Enter Password" name="psw1" required>
+                    <span id="reveal-pwd"  onmouseover="mouseoverPass();" onmouseout="mouseoutPass();">?</span>
                     <br>
                     <label for="psw"><b>Confirm Password</b></label>
                     <br>
