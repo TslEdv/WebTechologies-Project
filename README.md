@@ -23,11 +23,20 @@ The project is available in the following link: https://enos.itcollege.ee/~krsam
 ### Known issues
 
 * Rooms do not display capacity
-* Messy layout setup on pages written by Edvin
+* Messy layout setup on user management pages
 * My bookings says "here are your bookings" even when the user has no bookings
 * Date text does not fit into form fields
 * No limit per user, no CAPTCHA
 * ISO8601 format on confirmation page is too technical for the average user
 * Passwords are sanitised and hashed with SHA1
 * Feedback uses CSV and does not log IP
+* Booking form page requests users to log in, even when they are logged in
+
+### Features to add:
+ 
+ * Logout confirmation
+ * Show password button
+ * Feedback submission confirmation
+ * Check availability buttons should generate POST requests in JavaScript
+
 
