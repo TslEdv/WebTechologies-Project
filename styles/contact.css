@@ -15,3 +15,6 @@ input[type=submit]{
     margin: 5px;
     border-radius: 5px;
 }
+#thank {
+    display: none;
+}

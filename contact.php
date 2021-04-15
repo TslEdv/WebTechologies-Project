@@ -1,6 +1,6 @@
 <?php
    require_once("connect.db.php");
-   if(isset($_POST['feedbacksubmit'])){
+   if(isset($_POST['feedback'])){
       $mysqli = new mysqli($db_server, $db_user, $db_password, $db_name);
       $query = "INSERT INTO feedback (ip_address, feedback_date, feedback_text) VALUES (?, ?, ?)";
       $query = $mysqli->prepare($query);
@@ -17,7 +17,7 @@
 <head>
    <meta charset="utf-8">
    <title>Contact & Feedback</title>
-   <script src="script/feedback.js" async></script>
+   <script src="scripts/feedback.js" async></script>
    <link rel="shortcut icon" type="image/jpg" href="img/favicon.png" />
    <link rel="stylesheet" href="styles/main.css">
    <link rel="stylesheet" href="styles/contact.css">
@@ -66,15 +66,20 @@
       <p><b>Phone number: </b>currently unavailable</p>
       <p><b>Working hours: </b>Monday-Friday 14:00-02:00</p>
       <br>
-      <p><b>If you have any feedback or recommendations, please fill the box below:</b></p>
-      <form action="contact.php" method="POST">
-         <label for="feedback">
-            <h2>Feedback:</h2>
-         </label>
-         <textarea id="feedback" name="feedback" rows="7" cols="50"></textarea>
-         <br>
-         <input type="submit" value="Submit" name="feedbacksubmit">
-      </form>
+      <div id="feedback-form">
+         <p><b>If you have any feedback or recommendations, please fill the box below:</b></p>
+         <p>
+            <label for="feedback">
+               <h2>Feedback:</h2>
+            </label>
+            <textarea id="feedback" name="feedback" rows="7" cols="50"></textarea>
+            <br>
+            <input type="submit" value="Submit" name="feedbacksubmit" onclick="thankSubmission()">
+         </p>
+      </div>
+      <div id="thank">
+         <h2>Thank</h2>
+      </div>
    </article>
 </body>
 
