@@ -4,13 +4,10 @@
       $mysqli = new mysqli($db_server, $db_user, $db_password, $db_name);
       $query = "INSERT INTO feedback (ip_address, feedback_date, feedback_text) VALUES (?, ?, ?)";
       $query = $mysqli->prepare($query);
-      $query->bind_param("sss", $_SERVER['REMOTE_ADDR'], date("Y-m-d"), $_POST['feedback']);
+      $query->bind_param("sss", $_SERVER['REMOTE_ADDR'], date("Y-m-d H:i:s"), $_POST['feedback']);
       $query->execute();
       if ($query->error){
          die("Feedback submission failed. " . $query->error);
-      }
-      else {
-         echo "<p>Thank</p>";
       }
    }
 ?>
