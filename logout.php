@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="styles/main.css">
     <link href='https://fonts.googleapis.com/css?family=RocknRoll One' rel='stylesheet'>
     <script type="text/javascript" src="scripts/logout.js"></script>
+    <script type="text/javascript" src="scripts/logouttimer.js"></script>
 </head>
 
 <body>
@@ -54,7 +55,7 @@
         echo "<p style='text-align: center; 
         margin-top: 14vw;
         font-size: xxx-large;'>
-        Logged out!</p>";
+        Logged out! <br> You will be redirected in 5 seconds...</p>";
         ?>
     </article>
 </body>
