@@ -22,24 +22,27 @@ input, label {
 }
 .start-date, .end-date {
     float: left;
+    padding: 1%;
 }
 .start-date input, .end-date input {
-    width: 65%;
+    width: fit-content;
     float: left;
     margin-top: 20px;
     height: 50px;
     font-size: 30px;
 }
 .capacity {
-    width: 20%;
-    float: left
+    width: 15%;
+    padding: 1%;
+    float: left;
 }
 .capacity input {
-    width: 50%;
+    width: 40%;
     float: left;
     margin-top: 20px;
-    height: 50px;
+    height: 49px;
     font-size: 30px;
+    padding: 1%;
 }
 .features {
     clear: left;
