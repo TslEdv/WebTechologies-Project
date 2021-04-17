@@ -33,9 +33,5 @@ The project is available in the following link: https://enos.itcollege.ee/~krsam
 * Booking form page requests users to log in, even when they are logged in
 
 ### Features to add:
- 
- * Logout confirmation
- * Show password button
- * Feedback submission confirmation
 
 
