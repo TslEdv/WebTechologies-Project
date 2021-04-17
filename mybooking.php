@@ -62,7 +62,7 @@
          $userid;
          $roomid;
          while ($row = $id->fetch_assoc()) {
-            echo "<p><br> Your user ID is: ". $row["ID"]. "</p>";
+            echo "<p>Your user ID is: ". $row["ID"]. "</p>";
             $userid = $row["ID"];
          }
          $query = "SELECT ID, room_ID, start_date, end_date FROM bookings WHERE user_ID='$userid'"; //find user bookings
@@ -73,7 +73,7 @@
          while ($row = $result->fetch_assoc()) {
             $roomid = $row["room_ID"];
             $bookingid = $row["ID"];
-            echo "<br><p> Booking ID: ". $row["ID"]. " Starts: " . $row["start_date"] . " Ends: " . $row["end_date"];
+            echo "<p> Booking ID: ". $row["ID"]. " Starts: " . $row["start_date"] . " Ends: " . $row["end_date"];
             $query2 = "SELECT feature_ID, room_number FROM rooms WHERE ID='$roomid'"; //find rooms related to the roomid
             $result2 = mysqli_query($mysqli, $query2);
             while ($row = $result2->fetch_assoc()) {
