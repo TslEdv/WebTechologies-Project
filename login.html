@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="styles/main.css">
   <link rel="stylesheet" href="styles/login.css">
   <link href='https://fonts.googleapis.com/css?family=RocknRoll One' rel='stylesheet'>
-  <script type="text/javascript" src="scripts/showpassword.js"></script>
+  <script src="scripts/showpassword.js" async></script>
 </head>
 
 <body>
@@ -41,7 +41,7 @@
         <label for="psw"><b>Password</b></label>
         <br>
         <input type="password" id="pwd" placeholder="Enter Password" name="psw" required>
-        <span id="reveal-pwd"  onmouseover="mouseoverPass();" onmouseout="mouseoutPass();">?</span>
+        <span id="reveal-pwd"  onmouseover="mouseoverPass()" onmouseout="mouseoutPass()">?</span>
         <br>
         <button type="submit" name="login">Login</button>
         <label>

@@ -22,7 +22,8 @@ input, label {
 }
 .start-date, .end-date {
     float: left;
-    padding: 1%;
+    padding-right: 1%;
+    padding-top: 1%;
 }
 .start-date input, .end-date input {
     width: fit-content;

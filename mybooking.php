@@ -10,6 +10,7 @@
    <link href='https://fonts.googleapis.com/css?family=RocknRoll One' rel='stylesheet'>
    <script src="scripts/logout.js" async></script>
    <script src="scripts/dateformat.js" async></script>
+   <script src="scripts/remove.js" async></script>
 </head>
 
 <body>
@@ -54,36 +55,44 @@
          $mysqli = new mysqli($db_server, $db_user, $db_password, $db_name); // connect to database
          if (isset($_POST['deletion'])) {
             $retreivedid = $_POST['deletion'];
-            $query = "DELETE FROM bookings WHERE ID ='$retreivedid'";
-            mysqli_query($mysqli, $query);
+            $query = "DELETE FROM bookings WHERE ID = ?";
+            $query = $mysqli->prepare($query);
+            $query->bind_param("i", $retreivedid);
+            $query->execute();
+            header("Refresh:0; url=mybooking.php");
          }
-         $query = "SELECT ID FROM users WHERE username='$username'"; //find user id
-         $id = mysqli_query($mysqli, $query);
+         $query = "SELECT ID FROM users WHERE username= ?"; //find user id
+         $query = $mysqli->prepare($query);
+         $query->bind_param("s", $username);
+         $query->execute();
+         $query->bind_result($ID);
          echo "<p> Hello, ", $_SESSION['username'], "!</p>";
          $userid;
          $roomid;
-         while ($row = $id->fetch_assoc()) {
-            echo "<p>Your user ID is: " . $row["ID"] . "</p>";
-            $userid = $row["ID"];
+         while ($query->fetch()) {
+            echo "<p>Your user ID is: " . $ID . "</p>";
+            $userid = $ID;
          }
-         $query = "SELECT ID, room_ID, start_date, end_date FROM bookings WHERE user_ID='$userid'"; //find user bookings
-         $result = mysqli_query($mysqli, $query);
-         if (mysqli_num_rows($result) != 0) {
-            echo "<p> Here are Your bookings: </p>";
-         }
-         while ($row = $result->fetch_assoc()) {
-            $roomid = $row["room_ID"];
-            $bookingid = $row["ID"];
-            echo "<p> Booking ID: " . $row["ID"] . " Starts: <span class='startdate'>" . $row["start_date"] . "</span> Ends: <span class='enddate'>" . $row["end_date"] . "</span>";
-            $query2 = "SELECT feature_ID, room_number FROM rooms WHERE ID='$roomid'"; //find rooms related to the roomid
-            $result2 = mysqli_query($mysqli, $query2);
-            while ($row = $result2->fetch_assoc()) {
-               echo " Room number: " . $row["room_number"] . "</p>";
+         $query = "SELECT COUNT(*) FROM bookings AS B, users AS U WHERE U.username=? AND B.user_ID=U.ID;"; //find user id
+         $query = $mysqli->prepare($query);
+         $query->bind_param("s", $_SESSION['username']);
+         $query->execute();
+         $query->bind_result($count);
+         while ($query->fetch()) {
+            if ($count > 0) {
+               echo "<p> Here are Your bookings: </p>";
+            } else {
+               echo "<p> You currently have no bookings!</p>";
             }
-            echo "<form action='mybooking.php' method=POST>"; // button for removing booking
-            echo "<input type='hidden'name='deletion' value='$bookingid'>";
-            echo "<input type='submit' value='Remove'>";
-            echo "</form>";
+         }
+         $query = "SELECT B.ID, room_ID, start_date, end_date, room_number FROM bookings AS B, rooms AS R WHERE B.user_ID= ? AND R.ID=room_ID"; //find user bookings
+         $query = $mysqli->prepare($query);
+         $query->bind_param("i", $userid);
+         $query->execute();
+         $query->bind_result($ID, $roomid, $startdate, $end_date, $roomnumber);
+         while ($query->fetch()){
+            echo "<p> Booking ID: " . $ID . " Starts: <span class='startdate'>" . $startdate . "</span> Ends: <span class='enddate'>" . $end_date . "</span> Room number: " . $roomnumber . "</p>";
+            echo "<br><button type='button' onclick='removeBooking(".$ID.")'>Remove</button>";// button for removing booking;
          }
       } else {
          echo "<p>You must be logged in to see this page!</p>";

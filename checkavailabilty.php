@@ -64,7 +64,7 @@
                     exit("Please check Your date! Starting date cannot be in the past!");
                 }
                 else if(!filter_var($_GET['capacity'], FILTER_VALIDATE_INT) === 0 || !filter_var($_GET['capacity'], FILTER_VALIDATE_INT)){ //checks if capacity is integer
-                    exit("Capacity must be a number (integer)!");
+                    exit("Capacity must be a number (integer) or greater than 0!");
                 }
                 $capacity = intval($_GET['capacity']) * 2; //multiplied required capacity by 2 due to covid
                 $whiteboard = intval(isset($_GET['whiteboard'])); //converts required features into 0 or 1
