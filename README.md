@@ -24,12 +24,8 @@ The project is available in the following link: https://enos.itcollege.ee/~krsam
 
 * Rooms do not display capacity
 * Messy layout setup on user management pages
-* My bookings says "here are your bookings" even when the user has no bookings
 * Date text does not fit into form fields
-* No limit per user, no CAPTCHA
 * ISO8601 format on confirmation page is too technical for the average user
-* Passwords are sanitised and hashed with SHA1
-* Booking form page requests users to log in, even when they are logged in
 
 ### Features to add:
 
