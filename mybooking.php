@@ -8,7 +8,8 @@
    <link rel="stylesheet" href="styles/main.css">
    <link rel="stylesheet" href="styles/mybooking.css">
    <link href='https://fonts.googleapis.com/css?family=RocknRoll One' rel='stylesheet'>
-   <script type="text/javascript" src="scripts/logout.js"></script>
+   <script src="scripts/logout.js" async></script>
+   <script src="scripts/dateformat.js" async></script>
 </head>
 
 <body>
@@ -51,7 +52,7 @@
          require_once("connect.db.php");
          $username = $_SESSION['username'];
          $mysqli = new mysqli($db_server, $db_user, $db_password, $db_name); // connect to database
-         if (isset($_POST['deletion'])){
+         if (isset($_POST['deletion'])) {
             $retreivedid = $_POST['deletion'];
             $query = "DELETE FROM bookings WHERE ID ='$retreivedid'";
             mysqli_query($mysqli, $query);
@@ -62,18 +63,18 @@
          $userid;
          $roomid;
          while ($row = $id->fetch_assoc()) {
-            echo "<p>Your user ID is: ". $row["ID"]. "</p>";
+            echo "<p>Your user ID is: " . $row["ID"] . "</p>";
             $userid = $row["ID"];
          }
          $query = "SELECT ID, room_ID, start_date, end_date FROM bookings WHERE user_ID='$userid'"; //find user bookings
          $result = mysqli_query($mysqli, $query);
-         if (mysqli_num_rows($result) != 0){
+         if (mysqli_num_rows($result) != 0) {
             echo "<p> Here are Your bookings: </p>";
          }
          while ($row = $result->fetch_assoc()) {
             $roomid = $row["room_ID"];
             $bookingid = $row["ID"];
-            echo "<p> Booking ID: ". $row["ID"]. " Starts: " . $row["start_date"] . " Ends: " . $row["end_date"];
+            echo "<p> Booking ID: " . $row["ID"] . " Starts: <span class='startdate'>" . $row["start_date"] . "</span> Ends: <span class='enddate'>" . $row["end_date"] . "</span>";
             $query2 = "SELECT feature_ID, room_number FROM rooms WHERE ID='$roomid'"; //find rooms related to the roomid
             $result2 = mysqli_query($mysqli, $query2);
             while ($row = $result2->fetch_assoc()) {
