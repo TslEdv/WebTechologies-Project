@@ -81,36 +81,40 @@
         else if (isset($_POST['login'])) { //check for login
             require_once("connect.db.php");
             $mysqli = new mysqli($db_server, $db_user, $db_password, $db_name); // connect to database
-            $username = mysqli_real_escape_string($mysqli, $_POST['uname']);
-            $password = mysqli_real_escape_string($mysqli, $_POST['psw']);
+            $username = DataActions::sanitiseInput($mysqli, $_POST['uname']);
             if (empty($username)) {
                 exit("Username is required");
             }
             if (empty($password)) {
                 exit("Password is required");
             }
-            $password = sha1($password);
-            $query = "SELECT * FROM users WHERE username='$username' AND password='$password'"; //query for selecting the user from data
-            $results = mysqli_query($mysqli, $query);
-            if (mysqli_num_rows($results) == 1) { //if user is found do following
-                if (isset($_POST['remember'])) {
-                    session_name("PP_Table");
-                    $lifetime = 86400 * 30;
-                    session_set_cookie_params($lifetime);
-                    session_start();
-                    $_SESSION['username'] = $username;
-                    echo "<p>Login Successful! Welcome back ", $_SESSION['username'], "</p>";
-                } else {
-                    session_name("PP_Table");
-                    session_start();
-                    $_SESSION['username'] = $username;
-                    echo "<p>Login Successful! Welcome back ", $_SESSION['username'], "</p>";
+            $query = "SELECT * FROM users WHERE username=?"; //query for selecting the user from data
+            $query = $mysqli->prepare($query);
+            $query->bind_param("s", $username);
+            $query->execute();
+            $query->bind_result($user, $hash);
+            if($query->fetch()){
+                if(!password_verify($_POST['psw'], $hash)){
+                    exit("Password does not match");
                 }
-            }else {
-                exit("Wrong username/password combination");
+            }
+            session_name("PP_Table");
+            if (isset($_POST['remember'])) {
+                $lifetime = 86400 * 30;
+                session_set_cookie_params($lifetime);
+                session_start();
+                $_SESSION['username'] = $username;
+                $_SESSION['success'] = TRUE;
+                echo "<p>Login Successful! Welcome back ", $_SESSION['username'], "</p>";
+            } else {
+                session_name("PP_Table");
+                session_start();
+                $_SESSION['username'] = $username;
+                $_SESSION['success'] = TRUE;
+                echo "<p>Login Successful! Welcome back ", $_SESSION['username'], "</p>";
             }
         }
-        ?>
+    ?>
     </article>
 </body>
 
