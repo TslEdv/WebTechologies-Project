@@ -5,4 +5,5 @@ function thankSubmission(){
     xhr.open("POST", "contact.php", true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.send("feedback=" + document.getElementById('feedback').value);
+    document.getElementById("thank").innerHTML = "<h2>Thank you for your feedback!</h2>";
 }
