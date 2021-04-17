@@ -79,7 +79,6 @@
          </p>
       </div>
       <div id="thank">
-         <h2>Thank you for your feedback!</h2>
       </div>
    </article>
 </body>
