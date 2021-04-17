@@ -8,7 +8,8 @@
    <link rel="stylesheet" href="styles/main.css">
    <link rel="stylesheet" href="styles/mybooking.css">
    <link href='https://fonts.googleapis.com/css?family=RocknRoll One' rel='stylesheet'>
-   <script type="text/javascript" src="scripts/logout.js"></script>
+   <script src="scripts/logout.js" async></script>
+   <script src="scripts/dateformat.js" async></script>
 </head>
 
 <body>
@@ -73,7 +74,7 @@
          while ($row = $result->fetch_assoc()) {
             $roomid = $row["room_ID"];
             $bookingid = $row["ID"];
-            echo "<br><p> Booking ID: ". $row["ID"]. " Starts: " . $row["start_date"] . " Ends: " . $row["end_date"];
+            echo "<br><p> Booking ID: ". $row["ID"]. " Starts: <span class='startdate'>" . $row["start_date"] . "</span> Ends: <span class='enddate'>" . $row["end_date"] . "</span>";
             $query2 = "SELECT feature_ID, room_number FROM rooms WHERE ID='$roomid'"; //find rooms related to the roomid
             $result2 = mysqli_query($mysqli, $query2);
             while ($row = $result2->fetch_assoc()) {

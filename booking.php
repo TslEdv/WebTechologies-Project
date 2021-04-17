@@ -8,7 +8,8 @@
    <link rel="stylesheet" href="styles/main.css">
    <link rel="stylesheet" href="styles/checkavailability.css">
    <link href='https://fonts.googleapis.com/css?family=RocknRoll One' rel='stylesheet'>
-   <script type="text/javascript" src="scripts/logout.js"></script>
+   <script src="scripts/logout.js" async></script>
+   <script src="scripts/dateformat.js" async></script>
 </head>
 
 <body>
@@ -88,7 +89,7 @@
             print($query->error);
             $query->close();
             echo "<p>Booking successful! Your booking number is " . $mysqli->insert_id ."</p>";
-            echo "<p>You have made a booking starts on ", $startdate->format("Y-m-d\TH:i"), " and ends on ", $enddate->format("Y-m-d\TH:i"),"</p>";
+            echo "<p>You have made a booking starts on <span class='startdate'>", $startdate->format("Y-m-d\TH:i"), "</span> and ends on <span class='enddate'>", $enddate->format("Y-m-d\TH:i"),"</span></p>";
 
         }
         else {
