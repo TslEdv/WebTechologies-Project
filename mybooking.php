@@ -65,9 +65,11 @@
             echo "<p><br> Your user ID is: ". $row["ID"]. "</p>";
             $userid = $row["ID"];
          }
-         echo "<p> Here are Your bookings: </p>";
          $query = "SELECT ID, room_ID, start_date, end_date FROM bookings WHERE user_ID='$userid'"; //find user bookings
          $result = mysqli_query($mysqli, $query);
+         if (mysqli_num_rows($result) != 0){
+            echo "<p> Here are Your bookings: </p>";
+         }
          while ($row = $result->fetch_assoc()) {
             $roomid = $row["room_ID"];
             $bookingid = $row["ID"];

@@ -69,7 +69,6 @@
             if($query->fetch()){
                 exit("Username already exists.");
             }
-            print($password);
             $query = "INSERT INTO users (username, password) VALUES(?, ?)"; // query for adding user
             $query = $mysqli->prepare($query);
             $query->bind_param("ss", $username, $password);
