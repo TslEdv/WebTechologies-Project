@@ -29,7 +29,6 @@ The project is available in the following link: https://enos.itcollege.ee/~krsam
 * No limit per user, no CAPTCHA
 * ISO8601 format on confirmation page is too technical for the average user
 * Passwords are sanitised and hashed with SHA1
-* Feedback uses CSV and does not log IP
 * Booking form page requests users to log in, even when they are logged in
 
 ### Features to add:
