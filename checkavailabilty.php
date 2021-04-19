@@ -1,69 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>Check availability</title>
-        <link rel="shortcut icon" type="image/jpg" href="img/favicon.png" />
-        <link rel="stylesheet" href="styles/main.css">
-        <link rel="stylesheet" href="styles/checkavailability.css">
-        <link href='https://fonts.googleapis.com/css?family=RocknRoll One' rel='stylesheet'>
-        <script type="text/javascript" src="scripts/logout.js"></script>
-     </head>
-     <body>
-     <header>
-         <h1>Room booking</h1>
-         <ul id="login-menu">
-         <?php
-         session_name("PP_Table");
-         session_start();
-         if(isset($_SESSION['username'])){
-            echo "<li><a onclick='logout()'>Log out</a></li>";
-         } else{
-            echo "<li><a href='login.html'>Login</a></li>";
-            echo "<li><a href='register.html'>Register</a></li>";
-         }
-         ?>
-         </ul>
-      </header>
-      <nav>
-      <ul>
-         <?php
-         if (isset($_SESSION['username'])) {
-            echo "<li><a href='index.php'>Home page</a></li>
+
+<head>
+    <meta charset="utf-8">
+    <title>Check availability</title>
+    <link rel="shortcut icon" type="image/jpg" href="img/favicon.png" />
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/checkavailability.css">
+    <link rel="stylesheet" href="styles/modalimages.css">
+    <link href='https://fonts.googleapis.com/css?family=RocknRoll One' rel='stylesheet'>
+    <script src="scripts/logout.js" async></script>
+    <script src="scripts/images.js" async></script>
+</head>
+
+<body>
+    <header>
+        <h1>Room booking</h1>
+        <ul id="login-menu">
+            <?php
+            session_name("PP_Table");
+            session_start();
+            if (isset($_SESSION['username'])) {
+                echo "<li><a onclick='logout()'>Log out</a></li>";
+            } else {
+                echo "<li><a href='login.html'>Login</a></li>";
+                echo "<li><a href='register.html'>Register</a></li>";
+            }
+            ?>
+        </ul>
+    </header>
+    <nav>
+        <ul>
+            <?php
+            if (isset($_SESSION['username'])) {
+                echo "<li><a href='index.php'>Home page</a></li>
                <li><a href='overview.php'>Overview</a></li>
                <li><a href='bookingform.php'>Booking</a></li>
                <li><a href='contact.php'>Contact</a></li>
                <li><a href='mybooking.php'>My bookings</a></li>";
-         } else {
-            echo "<li><a href='index.php'>Home page</a></li>
+            } else {
+                echo "<li><a href='index.php'>Home page</a></li>
                <li><a href='overview.php'>Overview</a></li>
                <li><a href='bookingform.php'>Booking</a></li>
                <li><a href='contact.php'>Contact</a></li>";
-         }
-         ?>
-      </ul>
-   </nav>
-        <article>
+            }
+            ?>
+        </ul>
+    </nav>
+    <article>
         <?php
         require_once("classes.php");
         require_once("connect.db.php");
-        if(isset($_GET['submit'])){
-            if(!empty($_GET['start-date']) && !empty($_GET['end-date']) && isset($_GET['capacity'])){
+        if (isset($_GET['submit'])) {
+            if (!empty($_GET['start-date']) && !empty($_GET['end-date']) && isset($_GET['capacity'])) {
                 $date1 = new DateTime($_GET['start-date']);
                 $date2 = new DateTime($_GET['end-date']);
-                if($date1 == false){ //input validation
+                if ($date1 == false) { //input validation
                     exit("Please check Your date! Incorrect start date!");
-                }
-                else if($date2 == false){
+                } else if ($date2 == false) {
                     exit("Please check Your date! Incorrect end date!");
-                }
-                else if($date2 < $date1){
+                } else if ($date2 < $date1) {
                     exit("Please check Your date! Starting date cannot be further than ending date!");
-                }
-                else if($date1 < date("Y-m-d")){
+                } else if ($date1 < date("Y-m-d")) {
                     exit("Please check Your date! Starting date cannot be in the past!");
-                }
-                else if(!filter_var($_GET['capacity'], FILTER_VALIDATE_INT) === 0 || !filter_var($_GET['capacity'], FILTER_VALIDATE_INT)){ //checks if capacity is integer
+                } else if (!filter_var($_GET['capacity'], FILTER_VALIDATE_INT) === 0 || !filter_var($_GET['capacity'], FILTER_VALIDATE_INT)) { //checks if capacity is integer
                     exit("Capacity must be a number (integer) or greater than 0!");
                 }
                 $capacity = intval($_GET['capacity']) * 2; //multiplied required capacity by 2 due to covid
@@ -74,29 +74,29 @@
                 $featureSetArray = DataActions::readFeatures($mysqli, $capacity, $whiteboard, $audio, $projector);
                 $roomArray = DataActions::readRooms($mysqli, $featureSetArray);
                 $bookingArray = DataActions::readBookedRooms($mysqli, $roomArray, $date1, $date2);
-                foreach($bookingArray as $booking){ //removes rooms that are booked
+                foreach ($bookingArray as $booking) { //removes rooms that are booked
                     unset($roomArray[($booking->getRoomId())]);
                 }
-                foreach($featureSetArray as $feature){ //removes featuresets with 0 available rooms
+                foreach ($featureSetArray as $feature) { //removes featuresets with 0 available rooms
                     $featureRoomCount = 0;
-                    foreach($roomArray as $room){
-                        if($room->getFeatures() == $feature->getId()){
+                    foreach ($roomArray as $room) {
+                        if ($room->getFeatures() == $feature->getId()) {
                             $featureRoomCount++;
                         }
                     }
-                    if($featureRoomCount == 0){
+                    if ($featureRoomCount == 0) {
                         unset($featureSetArray[$feature->getId()]);
                     }
                 }
-                foreach($featureSetArray as $feature){
+                foreach ($featureSetArray as $feature) {
                     echo "<div class='room'>";
                     echo "<div class='room-info'>";
-                    echo "<h3>",$feature->getTitle(),"</h3>";
-                    echo "<p>", $feature->getDescription(),"</p>";
+                    echo "<h3>", $feature->getTitle(), "</h3>";
+                    echo "<p>", $feature->getDescription(), "</p>";
                     echo "<div class='room-actions'>";
                     echo "<p>Click room number to book: </p>";
                     $roomNumbers = DataActions::readFeatureRooms($mysqli, $feature->getId(), $roomArray);
-                    foreach($roomNumbers as $roomId=>$roomNumber){
+                    foreach ($roomNumbers as $roomId => $roomNumber) {
                         echo "<span class='room-buttons'>";
                         echo "<form action='booking.php' method='POST'>";
                         echo "<input type='hidden' name='startdate' value=", $date1->format('Y-m-d\TH:i'), ">";
@@ -108,16 +108,22 @@
                     echo "</div>";
                     echo "</div>";
                     echo "<div class='room-details'>";
-                    echo "<a href=", $feature->getImage() ,"><img src=", $feature->getImage(),"></a>";
+                    echo "<img class='myImages' src=", $feature->getImage(), " alt='", $feature->getTitle(), "'>";
                     echo "</div>";
                     echo "</div>";
                 }
-            } else{
+            } else {
                 echo "Please check your input!";
             }
             $mysqli->close();
         }
         ?>
-        </article>
-    </body>
- </html>
+    </article>
+    <div id="myModal" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content" id="img01">
+            <div id="caption"></div>
+    </div>
+</body>
+
+</html>

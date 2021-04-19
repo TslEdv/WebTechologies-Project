@@ -7,8 +7,10 @@
    <title>Homepage</title>
    <link rel="stylesheet" href="styles/main.css">
    <link rel="stylesheet" href="styles/homepage.css">
+   <link rel="stylesheet" href="styles/modalimages.css">
    <link href='https://fonts.googleapis.com/css?family=RocknRoll One' rel='stylesheet'>
-   <script type="text/javascript" src="scripts/logout.js"></script>
+   <script src="scripts/logout.js" async></script>
+   <script src="scripts/images.js" async></script>
 </head>
 
 <body>
@@ -18,7 +20,7 @@
          <?php
          session_name("PP_Table");
          session_start();
-         if(isset($_SESSION['username'])){
+         if (isset($_SESSION['username'])) {
             echo "<li><a onclick='logout()'>Log out</a></li>";
          } else {
             echo "<li><a href='login.html'>Login</a></li>";
@@ -59,19 +61,16 @@
          You only need to add amount of people, date, time and requirements.
       </p>
    </article>
-   <div>
-      <a href="img/buisnessroom1.jpg">
-         <img src="img/buisnessroom1.jpg" alt="room1">
-      </a>
-      <a href="img/buisness2room.jpg">
-         <img src="img/buisness2room.jpg" alt="room2">
-      </a>
-      <a href="img/businessroom3.jpg">
-         <img src="img/businessroom3.jpg" alt="room3">
-      </a>
-      <a href="img/buisnessroom.jpg">
-         <img src="img/buisnessroom.jpg" alt="room4">
-      </a>
+   <div class="images">
+      <img src="img/buisnessroom1.jpg" alt="Conference Room" class="myImages">
+      <img src="img/buisness2room.jpg" alt="Premium Room" class="myImages">
+      <img src="img/businessroom3.jpg" alt="Casual Room" class="myImages">
+      <img src="img/buisnessroom.jpg" alt="Cozy Room" class="myImages">
+      <div id="myModal" class="modal">
+         <span class="close">&times;</span>
+         <img class="modal-content" id="img01">
+         <div id="caption"></div>
+      </div>
    </div>
 </body>
 

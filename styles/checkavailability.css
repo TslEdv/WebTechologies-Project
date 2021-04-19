@@ -9,7 +9,7 @@
 .room-details{
     float: right;
 }
-img{
+.room-details > img{
     float: right;
     border: 2px solid currentColor;
     border-radius: 10px;

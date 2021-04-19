@@ -1,11 +1,11 @@
-div {
+.images {
     background-color: #dddddd;
     position:absolute;
     left:80%; top:8vw; right:0; bottom:0;
     width: 20%;
     height: auto;
 }
-div > a > img{
+.images > img{
     border: 2px solid currentColor;
     border-radius: 10px;
     padding: 10px;
@@ -14,7 +14,7 @@ div > a > img{
     display: block;
     margin: 10px;
 }
-div > a > img:hover{
+.images > img:hover{
     box-shadow: 0 0 2px 1px rgba(230, 8, 8, 0.979);
 }
 article {

@@ -27,7 +27,7 @@ nav {
     margin-bottom: 0;
     margin-top: 0;
     position: absolute;
-    z-index: 2;
+    z-index: 1;
     left:0; top:8vw; bottom: 0;
     width: 20%;
 }
@@ -74,7 +74,7 @@ nav a, header a, p a {
 	font-size: 2vw;
 	margin: 0.5vw;
 	border-radius: 0.2vw;
-    z-index: 1;
+    z-index: 2;
 	-webkit-box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.75);
 	-moz-box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.75);
 	box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.75);
