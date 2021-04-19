@@ -6,8 +6,10 @@
     <link rel="shortcut icon" type="image/jpg" href="img/favicon.png" />
     <title>Overview</title>
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/modalimages.css">
     <link href='https://fonts.googleapis.com/css?family=RocknRoll One' rel='stylesheet'>
-    <script type="text/javascript" src="scripts/logout.js"></script>
+    <script src="scripts/logout.js" async></script>
+    <script src="scripts/images.js" async></script>
     <style>
         .room {
             position: absolute;
@@ -24,7 +26,7 @@
             <?php
             session_name("PP_Table");
             session_start();
-            if(isset($_SESSION['username'])){
+            if (isset($_SESSION['username'])) {
                 echo "<li><a onclick='logout()'>Log out</a></li>";
             } else {
                 echo "<li><a href='login.html'>Login</a></li>";
@@ -34,23 +36,23 @@
         </ul>
     </header>
     <nav>
-      <ul>
-         <?php
-         if (isset($_SESSION['username'])) {
-            echo "<li><a href='index.php'>Home page</a></li>
+        <ul>
+            <?php
+            if (isset($_SESSION['username'])) {
+                echo "<li><a href='index.php'>Home page</a></li>
                <li><a href='overview.php'>Overview</a></li>
                <li><a href='bookingform.php'>Booking</a></li>
                <li><a href='contact.php'>Contact</a></li>
                <li><a href='mybooking.php'>My bookings</a></li>";
-         } else {
-            echo "<li><a href='index.php'>Home page</a></li>
+            } else {
+                echo "<li><a href='index.php'>Home page</a></li>
                <li><a href='overview.php'>Overview</a></li>
                <li><a href='bookingform.php'>Booking</a></li>
                <li><a href='contact.php'>Contact</a></li>";
-         }
-         ?>
-      </ul>
-   </nav>
+            }
+            ?>
+        </ul>
+    </nav>
     <article>
         <h3>Overview of PP_Table bookings services</h3>
         <p>
@@ -62,9 +64,13 @@
             Your feedback matter and we have made sure that people can reach out to us and share their toughts on our services.
         </p>
         <div class="room">
-            <img src="img/1991room.jpg" alt="room 1991" height="60%" width="60%">
+            <img src="img/1991room.jpg" alt="room 1991" height="60%" width="60%" class="myImages">
+            <div id="myModal" class="modal">
+                <span class="close">&times;</span>
+                <img class="modal-content" id="img01">
+                <div id="caption"></div>
+            </div>
         </div>
-
     </article>
 </body>
 
