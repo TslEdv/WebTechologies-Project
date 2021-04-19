@@ -85,13 +85,13 @@
                echo "<p> You currently have no bookings!</p>";
             }
          }
-         $query = "SELECT B.ID, room_ID, start_date, end_date, room_number FROM bookings AS B, rooms AS R WHERE B.user_ID= ? AND R.ID=room_ID"; //find user bookings
+         $query = "SELECT B.ID, room_ID, start_date, end_date, room_number, capacity FROM bookings AS B, rooms AS R, featuresets AS F WHERE B.user_ID= ? AND R.ID=room_ID AND R.feature_ID=F.ID"; //find user bookings
          $query = $mysqli->prepare($query);
          $query->bind_param("i", $userid);
          $query->execute();
-         $query->bind_result($ID, $roomid, $startdate, $end_date, $roomnumber);
+         $query->bind_result($ID, $roomid, $startdate, $end_date, $roomnumber,$capacity);
          while ($query->fetch()){
-            echo "<p> Booking ID: " . $ID . " Starts: <span class='startdate'>" . $startdate . "</span> Ends: <span class='enddate'>" . $end_date . "</span> Room number: " . $roomnumber . "</p>";
+            echo "<p> Booking ID: " . $ID . " Starts: <span class='startdate'>" . $startdate . "</span> Ends: <span class='enddate'>" . $end_date . "</span> Room number: " . $roomnumber . " Capacity: " . $capacity . "</p>";
             echo "<br><button type='button' onclick='removeBooking(".$ID.")'>Remove</button>";// button for removing booking;
          }
       } else {
