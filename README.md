@@ -1,11 +1,11 @@
 # ICD0007_ppTable
 ## Group description: Room planning and check tool for restrictions and room suitability (e.g, room with audio support, COVID-restrictions, etc.)
 ### Group members:
-Edvin Ess: edvess@taltech.ee responsible for: user management logic, cookies and sessions, login, register, contact pages, overall code overview
+Edvin Ess: edvess@taltech.ee responsible for: user management logic, cookies and sessions, login, register, contact pages, overall code overview, interactive images, javascript confirmations, making mybooking more interactive, bug fixes, main JavaScript design and implementation. 
 
-Mihkel Kiil: mikiil@taltech.ee responsible for: room availability checking, security, booking creation, booking, bug fixes. 
+Mihkel Kiil: mikiil@taltech.ee responsible for: room availability checking, security, booking creation, booking, bug fixes, feedback interactivity, local format for dates, password hashing fixes, main SQL design and implementation. 
 
-Kristiina Šamanina: krsama@taltech.ee responsible for: display of available rooms, input validation, minor contributions to all pages, design of home page, coordination, lead designer.
+Kristiina Šamanina: krsama@taltech.ee responsible for: display of available rooms, input validation, minor contributions to all pages, design of home page, coordination, lead designer, show password, room capacity, issues resolver, css fixes, mybooking.
 
 CSS was a joint responsibility among all team members.
 
@@ -18,14 +18,11 @@ Milestone 1 is in master branch in milestone1 tag.
 
 Milestone 2 is in master branch in milestone2r tag with corrections.
 
+Milestone 3 is in master branch in milestone3 tag.
+
 The project is available in the following link: https://enos.itcollege.ee/~krsama/project_pptable/
 
 ### Known issues
-
-* Rooms do not display capacity
-* Messy layout setup on user management pages
-* Date text does not fit into form fields
-* ISO8601 format on confirmation page is too technical for the average user
 
 ### Features to add:
 
