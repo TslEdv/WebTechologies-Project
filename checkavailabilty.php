@@ -61,7 +61,7 @@
                     exit("Please check Your date! Incorrect end date!");
                 } else if ($date2 < $date1) {
                     exit("Please check Your date! Starting date cannot be further than ending date!");
-                } else if ($date1 < date("Y-m-d")) {
+                } else if ($date1 < new DateTime('now') || $date2 < new DateTime('now')) {
                     exit("Please check Your date! Starting date cannot be in the past!");
                 } else if (!filter_var($_GET['capacity'], FILTER_VALIDATE_INT) === 0 || !filter_var($_GET['capacity'], FILTER_VALIDATE_INT)) { //checks if capacity is integer
                     exit("Capacity must be a number (integer) or greater than 0!");

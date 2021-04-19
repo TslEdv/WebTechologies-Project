@@ -68,7 +68,7 @@
             exit("Please check Your date! Incorrect end date!");
          } else if ($enddate < $startdate) {
             exit("Please check Your date! Starting date cannot be further than ending date!");
-         } else if ($startdate < date("Y-m-d")) {
+         } else if ($startdate < new DateTime('now')) {
             exit("Please check Your date! Starting date cannot be in the past!");
          }
          $mysqli = new mysqli($db_server, $db_user, $db_password, $db_name);
