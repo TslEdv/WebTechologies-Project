@@ -1,9 +1,13 @@
 function thankSubmission(){
     document.getElementById('feedback-form').style.display = "none";
-    document.getElementById('thank').style.display = "block";
-    var xhr = new XMLHttpRequest();
+    var thanks =  document.getElementById('thank');
+    thanks.style.display = "block";
+    var xhr = new XMLHttpRequest(); //send data as form
     xhr.open("POST", "contact.php", true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.send("feedback=" + document.getElementById('feedback').value);
-    document.getElementById("thank").innerHTML = "<h2>Thank you for your feedback!</h2>";
+    var tag = document.createElement("h2"); //create an h2 element to thank the user
+    var text = document.createTextNode("Thank you for your feedback!");
+    tag.appendChild(text);
+    thanks.appendChild(tag);
 }
