@@ -98,14 +98,12 @@
                     echo "<p>Click room number to book: </p>";
                     $roomNumbers = DataActions::readFeatureRooms($mysqli, $feature->getId(), $roomArray);
                     foreach ($roomNumbers as $roomId => $roomNumber) {
-                        echo "<span class='room-buttons'>";
-                        echo "<form action='booking.php' method='POST'>";
+                        echo "<form action='booking.php' method='POST' class='room-buttons'>";
                         echo "<input type='hidden' name='startdate' value=", $date1->format('Y-m-d\TH:i'), ">";
                         echo "<input type='hidden' name='enddate' value=", $date2->format('Y-m-d\TH:i'), ">";
                         echo "<button name='roomId' value=", $roomId, " type='submit'>", $roomNumber, "</button>";
                         echo "</form>";
                     }
-                    echo "</form>";
                     echo "</div>";
                     echo "</div>";
                     echo "<div class='room-details'>";
