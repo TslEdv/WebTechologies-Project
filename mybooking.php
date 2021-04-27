@@ -7,7 +7,8 @@
    <link rel="shortcut icon" type="image/jpg" href="img/favicon.png" />
    <link rel="stylesheet" href="styles/main.css">
    <link rel="stylesheet" href="styles/mybooking.css">
-   <link href='https://fonts.googleapis.com/css?family=RocknRoll One' rel='stylesheet'>
+   <link rel="preconnect" href="https://fonts.gstatic.com/">
+   <link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap" rel="stylesheet">
    <script src="scripts/logout.js" async></script>
    <script src="scripts/dateformat.js" async></script>
    <script src="scripts/remove.js" async></script>
@@ -89,10 +90,10 @@
          $query = $mysqli->prepare($query);
          $query->bind_param("i", $userid);
          $query->execute();
-         $query->bind_result($ID, $roomid, $startdate, $end_date, $roomnumber,$capacity);
-         while ($query->fetch()){
+         $query->bind_result($ID, $roomid, $startdate, $end_date, $roomnumber, $capacity);
+         while ($query->fetch()) {
             echo "<p> Booking ID: " . $ID . " Starts: <span class='startdate'>" . $startdate . "</span> Ends: <span class='enddate'>" . $end_date . "</span> Room number: " . $roomnumber . " Capacity: " . $capacity . "</p>";
-            echo "<br><button type='button' onclick='removeBooking(".$ID.")'>Remove</button>";// button for removing booking;
+            echo "<br><button type='button' onclick='removeBooking(" . $ID . ")'>Remove</button>"; // button for removing booking;
          }
       } else {
          echo "<p>You must be logged in to see this page!</p>";
