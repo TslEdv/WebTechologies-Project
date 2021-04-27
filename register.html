@@ -6,8 +6,9 @@
         <link rel="shortcut icon" type="image/jpg" href="img/favicon.png" />
         <link rel="stylesheet" href="styles/main.css">
         <link rel="stylesheet" href="styles/login.css">
-        <link href='https://fonts.googleapis.com/css?family=RocknRoll One' rel='stylesheet'>
-        <script type="text/javascript" src="scripts/showpassword.js"></script>
+        <link rel="preconnect" href="https://fonts.gstatic.com/" >
+        <link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap" rel="stylesheet">
+        <script src="scripts/showpassword.js" async></script>
         <style>
           nav{
             height:90%
@@ -42,16 +43,16 @@
                 <div class="container">
                     <label for="uname"><b>Please select a Username</b></label>
                     <br>
-                    <input type="text" placeholder="Enter Username" name="uname" required>
+                    <input type="text" id="uname" placeholder="Enter Username" name="uname" required>
                     <br>
-                    <label for="psw"><b>Password</b></label>
+                    <label for="pwd"><b>Password</b></label>
                     <br>
                     <input type="password" id="pwd" placeholder="Enter Password" name="psw1" required>
                     <span id="reveal-pwd"  onmouseover="mouseoverPass()" onmouseout="mouseoutPass()">?</span>
                     <br>
                     <label for="psw"><b>Confirm Password</b></label>
                     <br>
-                    <input type="password" placeholder="Re-enter password" name="psw2" required>
+                    <input type="password" id="psw" placeholder="Re-enter password" name="psw2" required>
                     <br>
                     <button type="submit" name="register">Register</button>
                   </div>
