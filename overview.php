@@ -7,7 +7,8 @@
     <title>Overview</title>
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/modalimages.css">
-    <link href='https://fonts.googleapis.com/css?family=RocknRoll One' rel='stylesheet'>
+    <link rel="preconnect" href="https://fonts.gstatic.com/">
+    <link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap" rel="stylesheet">
     <script src="scripts/logout.js" async></script>
     <script src="scripts/images.js" async></script>
     <style>
@@ -64,10 +65,10 @@
             Your feedback matter and we have made sure that people can reach out to us and share their toughts on our services.
         </p>
         <div class="room">
-            <img src="img/1991room.jpg" alt="room 1991" height="60%" width="60%" class="myImages">
+            <img src="img/1991room.jpg" alt="room 1991" style="width:60%;height:60%" class="myImages">
             <div id="myModal" class="modal">
                 <span class="close">&times;</span>
-                <img class="modal-content" id="img01">
+                <img class="modal-content" id="img01" src="img/1991room.jpg" alt="zoomedin-image">
                 <div id="caption"></div>
             </div>
         </div>
