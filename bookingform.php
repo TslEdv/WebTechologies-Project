@@ -7,8 +7,9 @@
    <link rel="shortcut icon" type="image/jpg" href="img/favicon.png" />
    <link rel="stylesheet" href="styles/main.css">
    <link rel="stylesheet" href="styles/booking.css">
-   <link href='https://fonts.googleapis.com/css?family=RocknRoll One' rel='stylesheet'>
-   <script type="text/javascript" src="scripts/logout.js"></script>
+   <link rel="preconnect" href="https://fonts.gstatic.com/">
+   <link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap" rel="stylesheet">
+   <script src="scripts/logout.js" async></script>
 </head>
 
 <body>
@@ -57,21 +58,21 @@
       <form action="checkavailabilty.php" method="GET" id="booking-form">
          <div class="start-date">
             <label for="start-date" id="start">Start date</label>
-            <input type="datetime-local" name="start-date">
+            <input type="datetime-local" id="start-date" name="start-date">
          </div>
          <div class="end-date">
             <label for="end-date" id="end">End date</label>
-            <input type="datetime-local" name="end-date">
+            <input type="datetime-local" id="end-date" name="end-date">
          </div>
          <div class="capacity">
             <label for="capacity" id="cap">Capacity</label>
-            <input type="number" name="capacity" placeholder="100">
+            <input type="number" id="capacity" name="capacity" placeholder="100">
          </div>
          <div class="features">
-            <label for="requirements" id="requer">Requirements:</label>
+            Requirements:
             <label for="whiteboard">Whiteboard</label>
             <input type="checkbox" id="whiteboard" name="whiteboard" value="1">
-            <label for="audio" id="audio">Audio</label>
+            <label for="audio">Audio</label>
             <input type="checkbox" id="audio" name="audio" value="1">
             <label for="projector" id="proj">Projector</label>
             <input type="checkbox" id="projector" name="projector" value="1">
