@@ -7,8 +7,9 @@
     <link rel="shortcut icon" type="image/jpg" href="img/favicon.png" />
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/registration.css">
-    <link href='https://fonts.googleapis.com/css?family=RocknRoll One' rel='stylesheet'>
-    <script type="text/javascript" src="scripts/logout.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com/">
+    <link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap" rel="stylesheet">
+    <script src="scripts/logout.js" async></script>
 </head>
 
 <body>
@@ -18,7 +19,7 @@
             <?php
             session_name("PP_Table");
             session_start();
-            if(isset($_SESSION['username'])){
+            if (isset($_SESSION['username'])) {
                 echo "<li><a onclick='logout()'>Log out</a></li>";
             } else {
                 echo "<li><a href='login.html'>Login</a></li>";
@@ -28,23 +29,23 @@
         </ul>
     </header>
     <nav>
-      <ul>
-         <?php
-         if (isset($_SESSION['username'])) {
-            echo "<li><a href='index.php'>Home page</a></li>
+        <ul>
+            <?php
+            if (isset($_SESSION['username'])) {
+                echo "<li><a href='index.php'>Home page</a></li>
                <li><a href='overview.php'>Overview</a></li>
                <li><a href='bookingform.php'>Booking</a></li>
                <li><a href='contact.php'>Contact</a></li>
                <li><a href='mybooking.php'>My bookings</a></li>";
-         } else {
-            echo "<li><a href='index.php'>Home page</a></li>
+            } else {
+                echo "<li><a href='index.php'>Home page</a></li>
                <li><a href='overview.php'>Overview</a></li>
                <li><a href='bookingform.php'>Booking</a></li>
                <li><a href='contact.php'>Contact</a></li>";
-         }
-         ?>
-      </ul>
-   </nav>
+            }
+            ?>
+        </ul>
+    </nav>
     <article>
         <?php
         require_once("connect.db.php");
@@ -52,7 +53,7 @@
             $mysqli = new mysqli($db_server, $db_user, $db_password, $db_name); // connect to database
             $username = mysqli_real_escape_string($mysqli, $_POST['uname']);
             $password = password_hash($_POST['psw1'], PASSWORD_BCRYPT);
-            if (empty($username) || empty($password) || empty($_POST['psw2'])){ //check for inputs
+            if (empty($username) || empty($password) || empty($_POST['psw2'])) { //check for inputs
                 exit("Incorrect input!");
             }
             unset($_POST['psw1']); //unset post password
@@ -66,7 +67,7 @@
             $query->execute();
             $query->bind_result($user);
             print($query->error);
-            if($query->fetch()){
+            if ($query->fetch()) {
                 exit("Username already exists.");
             }
             $query = "INSERT INTO users (username, password) VALUES(?, ?)"; // query for adding user
@@ -79,8 +80,7 @@
             $_SESSION['username'] = $username;
             $_SESSION['success'] = TRUE;
             echo "<p>Registery Successful!</p>";
-        }
-        else if (isset($_POST['login'])) { //check for login
+        } else if (isset($_POST['login'])) { //check for login
             $mysqli = new mysqli($db_server, $db_user, $db_password, $db_name); // connect to database
             $username = mysqli_real_escape_string($mysqli, $_POST['uname']);
             if (empty($username)) {
@@ -91,8 +91,8 @@
             $query->bind_param("s", $username);
             $query->execute();
             $query->bind_result($user, $hash);
-            while($query->fetch()){
-                if(password_verify($_POST['psw'], $hash)){
+            while ($query->fetch()) {
+                if (password_verify($_POST['psw'], $hash)) {
                     break;
                 }
             }
@@ -112,7 +112,7 @@
                 echo "<p>Login Successful! Welcome back ", $_SESSION['username'], "</p>";
             }
         }
-    ?>
+        ?>
     </article>
 </body>
 
