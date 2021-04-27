@@ -6,9 +6,10 @@
     <title>Check availability</title>
     <link rel="shortcut icon" type="image/jpg" href="img/favicon.png" />
     <link rel="stylesheet" href="styles/main.css">
-    <link href='https://fonts.googleapis.com/css?family=RocknRoll One' rel='stylesheet'>
-    <script type="text/javascript" src="scripts/logout.js"></script>
-    <script type="text/javascript" src="scripts/logouttimer.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com/">
+    <link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap" rel="stylesheet">
+    <script src="scripts/logout.js" async></script>
+    <script src="scripts/logouttimer.js" async></script>
 </head>
 
 <body>
@@ -20,23 +21,23 @@
         </ul>
     </header>
     <nav>
-      <ul>
-         <?php
-         if (isset($_SESSION['username'])) {
-            echo "<li><a href='index.php'>Home page</a></li>
+        <ul>
+            <?php
+            if (isset($_SESSION['username'])) {
+                echo "<li><a href='index.php'>Home page</a></li>
                <li><a href='overview.php'>Overview</a></li>
                <li><a href='bookingform.php'>Booking</a></li>
                <li><a href='contact.php'>Contact</a></li>
                <li><a href='mybooking.php'>My bookings</a></li>";
-         } else {
-            echo "<li><a href='index.php'>Home page</a></li>
+            } else {
+                echo "<li><a href='index.php'>Home page</a></li>
                <li><a href='overview.php'>Overview</a></li>
                <li><a href='bookingform.php'>Booking</a></li>
                <li><a href='contact.php'>Contact</a></li>";
-         }
-         ?>
-      </ul>
-   </nav>
+            }
+            ?>
+        </ul>
+    </nav>
     <article>
         <?php
         session_start();
@@ -46,7 +47,7 @@
         setcookie('PP_Table', null, -1, '/');
         echo "<p style='text-align: center; 
         margin-top: 14vw;
-        font-size: xxx-large;'>
+        font-size: xx-large;'>
         Logged out! <br> You will be redirected in 5 seconds...</p>";
         ?>
     </article>
