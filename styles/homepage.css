@@ -4,6 +4,7 @@
     left:80%; top:8vw; right:0; bottom:0;
     width: 20%;
     height: auto;
+    overflow: auto;
 }
 .images > img{
     border: 2px solid currentColor;
