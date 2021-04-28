@@ -65,14 +65,17 @@
                 } else if ($date1 < new DateTime('now') || $date2 < new DateTime('now')) {
                     exit("Please check Your date! Starting date cannot be in the past!");
                 } else if (!filter_var($_GET['capacity'], FILTER_VALIDATE_INT) === 0 || !filter_var($_GET['capacity'], FILTER_VALIDATE_INT)) { //checks if capacity is integer
-                    exit("Capacity must be a number (integer) or greater than 0!");
+                    exit("Capacity must be a number (integer) or greater than 0");
                 }
                 $capacity = intval($_GET['capacity']) * 2; //multiplied required capacity by 2 due to covid
                 $whiteboard = intval(isset($_GET['whiteboard'])); //converts required features into 0 or 1
                 $audio = intval(isset($_GET['audio']));
                 $projector = intval(isset($_GET['projector']));
                 $mysqli = new mysqli($db_server, $db_user, $db_password, $db_name);
-                $featureSetArray = DataActions::readFeatures($mysqli, $capacity, $whiteboard, $audio, $projector);
+                if($mysqli->connect_error){ //checks for errors when connecting to db
+                    die($mysqli->connect_error);
+                }
+                $featureSetArray = DataActions::readFeatures($mysqli, $capacity, $whiteboard, $audio, $projector, $date1, $date2);
                 $roomArray = DataActions::readRooms($mysqli, $featureSetArray);
                 $bookingArray = DataActions::readBookedRooms($mysqli, $roomArray, $date1, $date2);
                 foreach ($bookingArray as $booking) { //removes rooms that are booked
