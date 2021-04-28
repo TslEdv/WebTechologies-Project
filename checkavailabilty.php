@@ -76,22 +76,6 @@
                     die($mysqli->connect_error);
                 }
                 $featureSetArray = DataActions::readFeatures($mysqli, $capacity, $whiteboard, $audio, $projector, $date1, $date2);
-                $roomArray = DataActions::readRooms($mysqli, $featureSetArray);
-                $bookingArray = DataActions::readBookedRooms($mysqli, $roomArray, $date1, $date2);
-                foreach ($bookingArray as $booking) { //removes rooms that are booked
-                    unset($roomArray[($booking->getRoomId())]);
-                }
-                foreach ($featureSetArray as $feature) { //removes featuresets with 0 available rooms
-                    $featureRoomCount = 0;
-                    foreach ($roomArray as $room) {
-                        if ($room->getFeatures() == $feature->getId()) {
-                            $featureRoomCount++;
-                        }
-                    }
-                    if ($featureRoomCount == 0) {
-                        unset($featureSetArray[$feature->getId()]);
-                    }
-                }
                 foreach ($featureSetArray as $feature) {
                     echo "<div class='room'>";
                     echo "<div class='room-info'>";
@@ -99,7 +83,7 @@
                     echo "<p>", $feature->getDescription(), "</p>";
                     echo "<div class='room-actions'>";
                     echo "<p>Click room number to book: </p>";
-                    $roomNumbers = DataActions::readFeatureRooms($mysqli, $feature->getId(), $roomArray);
+                    $roomNumbers = DataActions::readFeatureRooms($mysqli, $feature->getId(), $date1, $date2);
                     foreach ($roomNumbers as $roomId => $roomNumber) {
                         echo "<form action='booking.php' method='POST' class='room-buttons'>";
                         echo "<input type='hidden' name='startdate' value=", $date1->format('Y-m-d\TH:i'), ">";
