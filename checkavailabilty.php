@@ -68,15 +68,15 @@
                     exit("Capacity must be a number (integer) or greater than 0");
                 }
                 $capacity = intval($_GET['capacity']) * 2; //multiplied required capacity by 2 due to covid
-                $whiteboard = intval(isset($_GET['whiteboard'])); //converts required features into 0 or 1
-                $audio = intval(isset($_GET['audio']));
-                $projector = intval(isset($_GET['projector']));
+                $whiteboard = intval($_GET['whiteboard']); //converts required features into 0 or 1
+                $audio = intval($_GET['audio']);
+                $projector = intval($_GET['projector']);
                 $mysqli = new mysqli($db_server, $db_user, $db_password, $db_name);
                 if($mysqli->connect_error){ //checks for errors when connecting to db
-                    die($mysqli->connect_error);
+                    die($mysqli->connect_error); // die and exit are the same
                 }
                 $featureSetArray = DataActions::readFeatures($mysqli, $capacity, $whiteboard, $audio, $projector, $date1, $date2);
-                foreach ($featureSetArray as $feature) {
+                foreach ($featureSetArray as $feature) { // looks at every feature seperately
                     echo "<div class='room'>";
                     echo "<div class='room-info'>";
                     echo "<h3>", $feature->getTitle(), "</h3>";
