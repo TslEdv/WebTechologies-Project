@@ -48,7 +48,7 @@
     </nav>
     <article>
         <?php
-        require_once("connect.db.php");
+        require_once("connect.db.php"); // servers info
         if (isset($_POST['register'])) {
             $mysqli = new mysqli($db_server, $db_user, $db_password, $db_name); // connect to database
             $username = mysqli_real_escape_string($mysqli, $_POST['uname']);
@@ -86,30 +86,32 @@
             if (empty($username)) {
                 exit("Username is required");
             }
-            $query = "SELECT * FROM users WHERE username=?"; //query for selecting the user from data
+            $query = "SELECT username, password FROM users WHERE username=?"; //query for selecting the user from data
             $query = $mysqli->prepare($query);
             $query->bind_param("s", $username);
             $query->execute();
             $query->bind_result($user, $hash);
             while ($query->fetch()) {
                 if (password_verify($_POST['psw'], $hash)) {
+                    session_name("PP_Table");
+                    if (isset($_POST['remember'])) {
+                        $lifetime = 86400 * 30;
+                        session_set_cookie_params($lifetime);
+                        session_start();
+                        $_SESSION['username'] = $username;
+                        $_SESSION['success'] = TRUE;
+                        echo "<p>Login Successful! Welcome back ", $_SESSION['username'], "</p>";
+                    } else {
+                        session_name("PP_Table");
+                        session_start();
+                        $_SESSION['username'] = $username;
+                        $_SESSION['success'] = TRUE;
+                        echo "<p>Login Successful! Welcome back ", $_SESSION['username'], "</p>";
+                    }
                     break;
+                } else{
+                    exit("Wrong password!");
                 }
-            }
-            session_name("PP_Table");
-            if (isset($_POST['remember'])) {
-                $lifetime = 86400 * 30;
-                session_set_cookie_params($lifetime);
-                session_start();
-                $_SESSION['username'] = $username;
-                $_SESSION['success'] = TRUE;
-                echo "<p>Login Successful! Welcome back ", $_SESSION['username'], "</p>";
-            } else {
-                session_name("PP_Table");
-                session_start();
-                $_SESSION['username'] = $username;
-                $_SESSION['success'] = TRUE;
-                echo "<p>Login Successful! Welcome back ", $_SESSION['username'], "</p>";
             }
         }
         ?>

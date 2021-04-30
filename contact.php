@@ -69,7 +69,7 @@ if (isset($_POST['feedback'])) {
       <p><b>Working hours: </b>Monday-Friday 14:00-02:00</p>
       <br>
       <div id="feedback-form">
-         <p><b>If you have any feedback or recommendations, please fill the box below:</b></p>
+         <p><b>If you have any feedback or recommendations, please fill the box below. Your IP address will be logged for security reasons.</b></p>
 
          <h2>Feedback:</h2>
          <textarea id="feedback" name="feedback" rows="7" cols="50"></textarea>
