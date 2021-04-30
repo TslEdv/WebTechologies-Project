@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Check availability</title>
+    <title>Log out</title>
     <link rel="shortcut icon" type="image/jpg" href="img/favicon.png" />
     <link rel="stylesheet" href="styles/main.css">
     <link rel="preconnect" href="https://fonts.gstatic.com/">
