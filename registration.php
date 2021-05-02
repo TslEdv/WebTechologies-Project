@@ -54,11 +54,11 @@
             $username = mysqli_real_escape_string($mysqli, $_POST['uname']);
             $password = password_hash($_POST['psw1'], PASSWORD_BCRYPT);
             if (empty($username) || empty($password) || empty($_POST['psw2'])) { //check for inputs
-                exit("Incorrect input!");
+                exit("<p>Incorrect input!</p>");
             }
             unset($_POST['psw1']); //unset post password
             if (!password_verify($_POST['psw2'], $password)) {
-                exit("The two passwords do not match");
+                exit("<p>The two passwords do not match</p>");
             }
             unset($_POST['psw2']);
             $user_check_query = "SELECT * FROM users WHERE username=? LIMIT 1"; //query for checking if user already exists
@@ -68,7 +68,7 @@
             $query->bind_result($user);
             print($query->error);
             if ($query->fetch()) {
-                exit("Username already exists.");
+                exit("<p>Username already exists.</p>");
             }
             $query = "INSERT INTO users (username, password) VALUES(?, ?)"; // query for adding user
             $query = $mysqli->prepare($query);
@@ -84,7 +84,17 @@
             $mysqli = new mysqli($db_server, $db_user, $db_password, $db_name); // connect to database
             $username = mysqli_real_escape_string($mysqli, $_POST['uname']);
             if (empty($username)) {
-                exit("Username is required");
+                exit("<p>Username is required</p>");
+            }
+            $query = "SELECT COUNT(*) FROM users WHERE username=?"; //find if user exists
+            $query = $mysqli->prepare($query);
+            $query->bind_param("s", $username);
+            $query->execute();
+            $query->bind_result($count);
+            while ($query->fetch()) {
+               if ($count == 0) {
+                  exit ("<p> Account does not exist </p>");
+               }
             }
             $query = "SELECT username, password FROM users WHERE username=?"; //query for selecting the user from data
             $query = $mysqli->prepare($query);
@@ -110,7 +120,7 @@
                     }
                     break;
                 } else{
-                    exit("Wrong password!");
+                    exit("<p>Wrong password!</p>");
                 }
             }
         }
