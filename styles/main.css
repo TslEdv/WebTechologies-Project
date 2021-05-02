@@ -1,7 +1,6 @@
 header{
     background-color: #222831;
     color: white;
-    margin-top: 0;
     position:absolute;
     left:0; right:0;
     height: 8vw;
@@ -10,9 +9,6 @@ header{
 header h1, h2{
     margin-left: 3vw;
     float:left;
-}
-header h2{
-    font-size: 22px;
 }
 header ul{
     list-style: none;
@@ -24,11 +20,10 @@ header li{
 nav {
     display:inline-block;
     background-color: #30475e;
-    margin-bottom: 0;
-    margin-top: 0;
     position: absolute;
     z-index: 1;
-    left:0; top:8vw; bottom: 0;
+    top:8vw; 
+    bottom: 0;
     width: 20%;
 }
 nav ul{
@@ -36,24 +31,12 @@ nav ul{
     position: relative;
     margin-left: 1vw;
     margin-right: 1vw;
-    left: 0;
-}
-nav li{
-    margin-left: 0;
-    margin-right: 25px;
-    width: 100%;
-    left:0;
 }
 nav a{
     width: 14vw;
     height: 3vw;
     text-align: center;
     float: right;
-}
-html, body {
-    box-sizing: border-box;
-    height: 100%;
-    width: 100%;
 }
 body {
     margin: 0;
