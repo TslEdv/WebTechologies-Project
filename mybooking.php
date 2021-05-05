@@ -54,14 +54,6 @@
          require_once("connect.db.php");
          $username = $_SESSION['username'];
          $mysqli = new mysqli($db_server, $db_user, $db_password, $db_name); // connect to database
-         if (isset($_POST['deletion'])) {
-            $retreivedid = $_POST['deletion'];
-            $query = "DELETE FROM bookings WHERE ID = ?";
-            $query = $mysqli->prepare($query);
-            $query->bind_param("i", $retreivedid);
-            $query->execute();
-            header("Refresh:0; url=mybooking.php");
-         }
          $query = "SELECT ID FROM users WHERE username= ?"; //find user id
          $query = $mysqli->prepare($query);
          $query->bind_param("s", $username);
@@ -73,6 +65,23 @@
          while ($query->fetch()) {
             echo "<p>Your user ID is: " . $ID . "</p>";
             $userid = $ID;
+         }
+         if (isset($_POST['deletion'])) {
+            $query = "SELECT B.ID FROM bookings AS B WHERE B.user_ID= ?"; //find user bookings
+            $query = $mysqli->prepare($query);
+            $query->bind_param("i", $userid);
+            $query->execute();
+            $query->bind_result($ID);
+            while ($query->fetch()){
+               if ($ID = $_POST['deletion']){
+                  $retreivedid = $_POST['deletion'];
+                  $query = "DELETE FROM bookings WHERE ID = ?";
+                  $query = $mysqli->prepare($query);
+                  $query->bind_param("i", $retreivedid);
+                  $query->execute();
+                  header("Refresh:0; url=mybooking.php");
+               }
+            }
          }
          $query = "SELECT COUNT(*) FROM bookings AS B, users AS U WHERE U.username=? AND B.user_ID=U.ID;"; //find user id
          $query = $mysqli->prepare($query);
