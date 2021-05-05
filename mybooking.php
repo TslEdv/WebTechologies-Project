@@ -73,7 +73,7 @@
             $query->execute();
             $query->bind_result($ID);
             while ($query->fetch()){
-               if ($ID = $_POST['deletion']){
+               if ($ID == $_POST['deletion']){
                   $retreivedid = $ID;
                   $query = "DELETE FROM bookings WHERE ID = ?";
                   $query = $mysqli->prepare($query);
